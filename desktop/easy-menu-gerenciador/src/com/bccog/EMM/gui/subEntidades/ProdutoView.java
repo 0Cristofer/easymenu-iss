@@ -1,8 +1,5 @@
 package com.bccog.EMM.gui.subEntidades;
 
-import com.bccog.EMM.EMM;
-import com.bccog.EMM.bd.entidades.cardapio.Cardapio;
-import com.bccog.EMM.bd.entidades.categoria.Categoria;
 import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.entidades.produto.ProdutoComTamanho;
 import com.bccog.EMM.bd.entidades.produto.ProdutoPrecoUnico;

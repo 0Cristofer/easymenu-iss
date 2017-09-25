@@ -1,7 +1,6 @@
 package com.bccog.EMM.gerenciadores;
 
 import com.bccog.EMM.EMM;
-import com.bccog.EMM.bd.entidades.categoria.Categoria;
 import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.entidades.produto.ProdutoComTamanho;
 import com.bccog.EMM.bd.entidades.produto.ProdutoPrecoUnico;
@@ -10,12 +9,9 @@ import com.bccog.EMM.bd.entidades.usuario.Usuario;
 import com.bccog.EMM.bd.exceptions.*;
 import com.bccog.EMM.gerenciadores.exceptions.MissingPriceException;
 import com.bccog.EMM.gerenciadores.exceptions.NegativePriceException;
-import org.jdeferred.ProgressCallback;
-import org.restonfire.responses.StreamingEvent;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Classe gerenciadora de produtos

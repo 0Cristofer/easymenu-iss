@@ -4,7 +4,6 @@ import com.bccog.EMM.EMM;
 import com.bccog.EMM.bd.entidades.categoria.Categoria;
 import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.exceptions.*;
-import com.bccog.EMM.gerenciadores.GerenciadorCategoria;
 import com.bccog.EMM.gerenciadores.GerenciadorProdutos;
 import com.bccog.EMM.gui.subEntidades.ProdutoView;
 import com.bccog.FXController.BaseController;

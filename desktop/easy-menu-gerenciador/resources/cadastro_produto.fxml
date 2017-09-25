@@ -2,14 +2,12 @@
 
 <!-- Autores: Guilherme Quental & Bruno Cesar -->
 
-<?import java.lang.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
 <BorderPane fx:id="main_pane_" maxHeight="1080.0" maxWidth="1920.0" minHeight="405.0" minWidth="720.0" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bccog.EMM.gui.controladores.CadastroProdutoController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" pannable="true" BorderPane.alignment="CENTER_RIGHT">

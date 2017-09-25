@@ -7,16 +7,14 @@ import com.bccog.EMM.gerenciadores.exceptions.MissingPriceException;
 import com.bccog.EMM.gerenciadores.exceptions.NegativePriceException;
 import com.bccog.FXController.BaseController;
 import com.bccog.FXController.ScreenController;
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.text.Text;
 
 /**
  * Controlador do cadastro do produto

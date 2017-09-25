@@ -1,10 +1,6 @@
 package com.bccog.EMM;
 
 import com.bccog.EMM.bd.entidades.usuario.Usuario;
-import com.bccog.EMM.gerenciadores.GerenciadorCardapios;
-import com.bccog.EMM.gerenciadores.GerenciadorCategoria;
-import com.bccog.EMM.gerenciadores.GerenciadorPedidos;
-import com.bccog.EMM.gerenciadores.GerenciadorProdutos;
 import com.bccog.EMM.gui.GUIController;
 import javafx.stage.Stage;
 
