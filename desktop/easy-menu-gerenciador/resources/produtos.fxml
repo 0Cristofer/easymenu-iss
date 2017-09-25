@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Autores: Guilherme Quental & Bruno Cesar -->
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<BorderPane fx:id="main_pane_" maxHeight="1080.0" maxWidth="1920.0" minHeight="405.0" minWidth="720.0" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bccog.EMM.gui.controladores.ProdutosController">
+   <right>
+      <VBox maxWidth="284.0" minWidth="144.0" prefWidth="192.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton fx:id="btn_inicio_" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" onAction="#inicio" prefHeight="540.0" prefWidth="192.0" stylesheets="@stylesheet.css" text="Inicio" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font></JFXButton>
+            <JFXButton fx:id="btn_iniciar_sessao_" onAction="#iniciarSessao" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Iniciar Sessão" textFill="WHITE">
+               <graphic>
+                  <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/sessao.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton fx:id="btn_cardapios_" contentDisplay="TOP" layoutX="10.0" layoutY="60.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" onAction="#cardapios" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Cardápios" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/cardapio.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton fx:id="btn_produtos_" contentDisplay="TOP" layoutX="10.0" layoutY="110.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" onAction="#produtos" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Produtos" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/produtos.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton fx:id="btn_promocoes_" onAction="#categorias" contentDisplay="TOP" layoutX="10.0" layoutY="135.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Categorias" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/promocoes.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton fx:id="btn_registros_" onAction="#dadosEstabelecimento" contentDisplay="TOP" layoutX="10.0" layoutY="35.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Estabelecimento" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/registros.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton fx:id="btn_configuracoes_" contentDisplay="TOP" layoutX="10.0" layoutY="85.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Configurações" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/config.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
+            <JFXButton fx:id="btn_sair_" layoutX="10.0" layoutY="190.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" onAction="#sair" prefHeight="540.0" prefWidth="192.0" styleClass="btn_sair_" stylesheets="@stylesheet.css" text="Sair" textFill="WHITE" />
+         </children>
+      </VBox>
+   </right>
+   <center>
+      <GridPane style="-fx-background-color: #e0e0e0;" BorderPane.alignment="CENTER">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="552.0" minWidth="10.0" percentWidth="25.0" prefWidth="369.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" percentWidth="25.0" prefWidth="290.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" percentWidth="25.0" prefWidth="290.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" percentWidth="25.0" prefWidth="290.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="135.31578947368422" minHeight="10.0" percentHeight="10.0" prefHeight="135.31578947368422" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="248.84210526315786" minHeight="10.0" percentHeight="10.0" prefHeight="13.000000000000007" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="349.0" minHeight="10.0" percentHeight="60.0" prefHeight="349.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label fx:id="lbl_titulo_" text="Produtos" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="txtf_busca_" prefHeight="23.0" prefWidth="306.0" promptText="Busca" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="15.0" />
+               </GridPane.margin>
+            </JFXTextField>
+            <GridPane GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <JFXTreeTableView fx:id="produto_view_" styleClass="card" stylesheets="@stylesheet.css">
+                     <GridPane.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </GridPane.margin>
+                  </JFXTreeTableView>
+               </children>
+            </GridPane>
+            <JFXButton fx:id="btn_cadastrar_prod_" buttonType="RAISED" onAction="#cadastrarProduto" prefHeight="40.0" style="-fx-background-color: #757575;" text="Cadastrar novo Produto" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <JFXButton fx:id="btn_add_categoria_" buttonType="RAISED" layoutX="78.0" layoutY="492.0" onAction="#addCategoria" prefHeight="40.0" style="-fx-background-color: #757575;" text="Adicionar a categoria" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btn_del_prod_" buttonType="RAISED" disable="true" layoutX="312.0" layoutY="492.0" onAction="#deletarProduto" prefHeight="40.0" style="-fx-background-color: #757575;" text="Deletar Produto" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <JFXComboBox fx:id="cbox_categorias_" prefHeight="25.0" prefWidth="162.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </JFXComboBox>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

@@ -1,0 +1,280 @@
+/* Autor: Guilherme Quental */
+
+/*Menu Lateral */
+
+#btn_inicio_{
+-fx-background-color: #1de9b6;
+-fx-text-fill:#ffffff;
+
+}
+
+
+#btn_inicio_:hover{
+-fx-background-color: #00b686;
+
+}
+
+
+.btn_lateral_{
+
+-fx-background-color: #455a64;
+-fx-text-fill:#ffffff;
+-fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+
+}
+
+.btn_lateral_:hover{
+-fx-text-fill:#1de9b6;
+-fx-background-color: #1c313a;
+-fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+}
+
+
+
+
+#btn_sair_{
+-fx-background-color: #e53935;
+-fx-text-fill:#ffffff;
+    -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+
+}
+
+#btn_sair_:hover{
+-fx-background-color: #ab000d;
+    -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+
+}
+
+#icon{
+-fx-background-position:left;
+
+}
+
+
+
+.accordion_inicial{
+-fx-background-color: #ab000d;
+
+}
+
+
+
+
+
+/*Tela inicial*/
+
+.titled-pane > .title {
+  -fx-background-color: -fx-box-border, -fx-inner-border, -fx-body-color;
+  -fx-background-insets: 0, 1, 2;
+  -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+  -fx-padding: 0.166667em 1.166667em 0.25em 0; /* 2 14 3 0 */
+  -fx-color: #ffffff;
+}
+
+.titled-pane > .title > .arrow-button .arrow {
+  -fx-background-color: transparent;
+  -fx-focus-color: transparent;
+
+}
+
+.scroll-pane {
+    -fx-background-color: -fx-box-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+    -fx-color: #e0e0e0;
+}
+
+/*Splashscreen*/
+.splash_background{
+    -fx-background-image: url("backgrounds/login_EM_Branco.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-size: 100%;
+}
+
+
+/* Tela login */
+.login_background{
+  -fx-background-image: url("backgrounds/login_EM.png");
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+  -fx-background-size: 100%;
+}
+
+.btn_entrar{
+  -fx-background-color: whitesmoke;
+  -fx-border-radius: 0px;
+}
+
+
+/*Tela Login*/
+
+
+.text_field{
+  -fx-text-fill:#ffffff;
+}
+
+/* Tela Produtos */
+
+.btn_produtos_{
+  -fx-background-color:#1c313a;
+  -fx-text-fill:#1de9b6;
+    -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+
+}
+
+
+
+.card {
+  -fx-background-color: rgb(255.0, 255.0, 255.0);
+  -fx-background-radius: 0;
+  -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0, 1.5);
+  -fx-padding: 15 5 15 5;
+
+}
+
+.text-area .content{
+  -fx-background-color: rgb(255.0, 255.0, 255.0);
+  -fx-background-radius: 0;
+  -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 6.0, 0.7, 0.0,
+  1.5);
+  -fx-padding: 5 5 5 5;
+  -fx-focus-color: transparent;
+
+}
+
+.text-area:focused {
+  -fx-background-color: linear-gradient(to bottom, derive(-fx-text-box-border, -10%), -fx-text-box-border),
+  linear-gradient(from 0px 0px to 0px 5px, derive(-fx-control-inner-background, -9%), -fx-control-inner-background);
+}
+
+/* Tela produtos */
+
+.tree-table-view{
+    -fx-tree-table-color: rgba(0, 150, 0, 0.8);
+    -fx-tree-table-rippler-color : rgba(255, 0, 0, 0.9);
+}
+.tree-table-view:focused .tree-table-row-cell:selected {
+    -fx-background-color: -fx-tree-table-color  ;
+    -fx-table-cell-border-color: -fx-tree-table-color;
+}
+
+.tree-table-view:focused .tree-table-row-cell:selected .tree-table-cell{
+    -fx-text-fill: white;
+}
+
+.tree-table-view .jfx-rippler {
+    -fx-rippler-fill: -fx-tree-table-rippler-color;
+}
+
+.tree-table-view .column-header ,
+.tree-table-view .column-header-background,
+.tree-table-view .column-header-background .filler{
+    -fx-background-color:TRANSPARENT;
+}
+
+.tree-table-view .column-header{
+    -fx-border-width : 0 1 0 1;
+    -fx-border-color: #F3F3F3;
+}
+
+.tree-table-view .column-header .label {
+    -fx-text-fill : #949494;
+    -fx-padding : 16 0 16 0 ;
+}
+
+.tree-table-view .column-header .arrow, .tree-table-view .column-header .sort-order-dot{
+    -fx-background-color : #949494;
+}
+
+.tree-table-view .column-header:last-visible {
+    -fx-border-width: 0 2 0 1;
+}
+
+.tree-table-view .column-header-background{
+    -fx-border-width : 0 0.0 1 0;
+    -fx-border-color:#F3F3F3;
+}
+
+.tree-table-view .tree-table-cell{
+    -fx-border-width:0 0 0 0;
+    -fx-padding : 16 0 16 0 ;
+}
+
+.tree-table-view .column-overlay{
+    -fx-background-color: -fx-tree-table-color;
+}
+
+.tree-table-view .column-resize-line, .tree-table-view .column-drag-header{
+    -fx-background-color: -fx-tree-table-rippler-color;
+}
+
+.tree-table-view:focused {
+    -fx-background-color: -fx-tree-table-color,-fx-box-border,-fx-control-inner-background;
+    -fx-background-insets: -1.4, 0, 1;
+    -fx-background-radius: 1.4, 0, 0;
+    /*....*/
+    -fx-padding: 1; /* 0.083333em; */
+}
+
+.tree-table-row-cell > .tree-disclosure-node > .arrow {
+    -fx-background-color: -fx-text-fill;
+    -fx-padding: 0.333333em 0.229em 0.333333em 0.229em; /* 4 */
+    -fx-shape: "M 0 -3.5 L 4 0 L 0 3.5 z";
+}
+.tree-table-row-cell .jfx-text-field{
+    -fx-focus-color: rgba(240,40,40);
+}
+
+/*Cardapio*/
+
+.btn_cardapio_{
+
+    -fx-background-color: #616161;
+    -fx-text-fill:#ffffff;
+    -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+
+
+}
+.btn_cardapio_:hover{
+
+    -fx-background-color: #373737;
+    -fx-text-fill:#ffffff;
+    -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+
+}
+
+#btn_cardapio_voltar_{
+    -fx-background-color:#8e8e8e;
+    -fx-text-fill:#ffffff;
+    -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+
+}
+#btn_cardapio_voltar_:hover{
+    -fx-background-color:#a4a4a4;
+    -fx-text-fill:#ffffff;
+    -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+
+}
+
+.btn_sim_{
+    -fx-background-color: #81c784;
+    -fx-text-fill:#ffffff;
+}
+
+.btn_nao_{
+    -fx-background-color:#e53935;
+    -fx-text-fill:#ffffff;
+
+}
+
+/* WorkStation Screen */
+.btn_aceitar_{
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+}
+
+.btn_recusar_{
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 0 0 0 0, 0 0 0 0, 0 0 0 0;
+}

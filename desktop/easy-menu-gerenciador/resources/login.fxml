@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Autores: Guilherme Quental & Bruno Cesar -->
+
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<GridPane fx:id="main_pane_" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#keyboardInput" prefHeight="540.0" prefWidth="960.0" styleClass="login_background" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bccog.EMM.gui.controladores.LoginController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <GridPane GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" percentHeight="33.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" percentHeight="33.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" percentHeight="34.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <JFXButton fx:id="btn_entrar_" alignment="CENTER" buttonType="RAISED" onAction="#entrar" prefHeight="40.0" prefWidth="90.0" ripplerFill="#a4a4a4" styleClass="btn_entrar" text="Entrar" textAlignment="CENTER" textFill="#757575" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXTextField fx:id="txtf_login_" alignment="TOP_LEFT" focusColor="WHITE" promptText="Login" styleClass="text_field" stylesheets="@stylesheet.css" unFocusColor="#ba000d" GridPane.columnSpan="2147483647">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXTextField>
+            <JFXPasswordField fx:id="txtf_senha_" alignment="TOP_LEFT" focusColor="WHITE" layoutX="10.0" layoutY="29.0" promptText="Senha" styleClass="text_field" stylesheets="@stylesheet.css" unFocusColor="#ba000d" GridPane.columnSpan="2147483647" GridPane.rowIndex="1">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXPasswordField>
+            <JFXButton fx:id="btn_registrar_" alignment="CENTER" buttonType="RAISED" nodeOrientation="LEFT_TO_RIGHT" onAction="#registrar" prefHeight="40.0" prefWidth="90.0" ripplerFill="#a4a4a4" styleClass="btn_entrar" text="Registrar" textAlignment="CENTER" textFill="#757575" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </GridPane>
+   </children>
+</GridPane>
