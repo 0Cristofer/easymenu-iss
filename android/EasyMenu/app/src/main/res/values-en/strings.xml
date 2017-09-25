@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lbl_login">Login</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_pass">Password</string>
+    <string name="button_ok">Login</string>
+    <string name="produtounico">Add single prince only product</string>
+    <string name="produtotamamho">Add multiple prince product</string>
+    <string name="order">Order</string>
+</resources>

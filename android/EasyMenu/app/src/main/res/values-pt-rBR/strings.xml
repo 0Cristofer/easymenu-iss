@@ -1,0 +1,10 @@
+<resources>
+    <string name="lbl_login">Logar</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_pass">Senha</string>
+    <string name="button_ok">Logar</string>
+    <string name="produtounico">Adicionar produto preço único</string>
+    <string name="produtotamamho">Adicionar produto tamanhos</string>
+    <string name="order">Pedir</string>
+    <string name="produtcs">Produtos : </string>
+</resources>

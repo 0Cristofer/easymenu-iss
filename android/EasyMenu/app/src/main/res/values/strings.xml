@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Easy Menu</string>
+    <string name="lbl_login">Login</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_pass">Password</string>
+    <string name="button_ok">Login</string>
+    <string name="produtounico">Add single prince only product</string>
+    <string name="produtotamamho">Add multiple prince product</string>
+    <string name="order">Order</string>
+    <string name="produtcs">Products : </string>
+    <string name="total">Total : </string>
+</resources>
