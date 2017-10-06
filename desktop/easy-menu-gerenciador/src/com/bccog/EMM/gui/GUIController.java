@@ -45,6 +45,10 @@ public class GUIController {
                 GUIController.class.getResource("/cadastro_produto.fxml"));
         main_controller.loadScreen("login",
                 GUIController.class.getResource("/login.fxml"));
+        main_controller.loadScreen("seleciona_cardapio",
+                GUIController.class.getResource("/seleciona_cardapio.fxml"));
+        main_controller.loadScreen("cardapio",
+                GUIController.class.getResource("/cardapio.fxml"));
         main_controller.loadScreen("produtos",
                 GUIController.class.getResource("/produtos.fxml"));
         main_controller.loadScreen("info_estabelecimento",

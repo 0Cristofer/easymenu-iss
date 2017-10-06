@@ -60,8 +60,8 @@ public class ProdutosController implements BaseController {
         //Esta nesta tela
     }
 
-    @FXML public void cardapios(){
-    }
+    @FXML public void cardapios(){ controller_.setVisibleScreen("seleciona_cardapio");}
+
 
     @FXML public void inicio(){
         controller_.setVisibleScreen("main");

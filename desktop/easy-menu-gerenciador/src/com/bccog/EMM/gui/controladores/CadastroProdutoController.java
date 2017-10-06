@@ -58,8 +58,7 @@ public class CadastroProdutoController implements BaseController {
         //sub-tela de produtos
     }
 
-    public void cardapios(){
-    }
+    public void cardapios(){ controller_.setVisibleScreen("seleciona_cardapio");}
 
     public void inicio(){
         controller_.setVisibleScreen("main");

@@ -74,7 +74,7 @@ public class InfoEstabelecimentoController implements BaseController{
         controller_.setVisibleScreen("produtos");
     }
 
-    public void cardapios(){}
+    public void cardapios(){ controller_.setVisibleScreen("seleciona_cardapio");}
 
     public void verDados(){
         controller_.setVisibleScreen("dados_estabelecimento");

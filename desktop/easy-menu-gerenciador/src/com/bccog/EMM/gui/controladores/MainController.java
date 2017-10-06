@@ -25,8 +25,7 @@ public class MainController implements BaseController {
         controller_.setVisibleScreen("produtos");
     }
 
-    public void cardapios(){
-    }
+    public void cardapios(){ controller_.setVisibleScreen("seleciona_cardapio");}
 
     public void dadosEstabelecimento(){ controller_.setVisibleScreen("info_estabelecimento");}
 
