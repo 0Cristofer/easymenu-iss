@@ -55,6 +55,8 @@ public class GUIController {
                 GUIController.class.getResource("/info_estabelecimento.fxml"));
         main_controller.loadScreen("carregando",
                 GUIController.class.getResource("/splashscreen.fxml"));
+        main_controller.loadScreen("sessao_trabalho",
+                GUIController.class.getResource("/sessao_trabalho.fxml"));
 
         main_controller.setInitialScreen("login");
     }

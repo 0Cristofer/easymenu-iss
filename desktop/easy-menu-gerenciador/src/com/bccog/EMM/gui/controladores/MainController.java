@@ -27,10 +27,13 @@ public class MainController implements BaseController {
 
     public void cardapios(){ controller_.setVisibleScreen("seleciona_cardapio");}
 
-    public void dadosEstabelecimento(){ controller_.setVisibleScreen("info_estabelecimento");}
+    public void dadosEstabelecimento(){
+        controller_.setVisibleScreen("info_estabelecimento");}
 
     public void categorias(){
     }
+
+
 
     public void sair(){
         Platform.exit();
@@ -61,6 +64,7 @@ public class MainController implements BaseController {
         return main_pane_.getPrefHeight();
     }
 
-    public void iniciarSessao(ActionEvent event) {
-    }
+    public void iniciarSessao(){
+        controller_.setVisibleScreen("sessao_trabalho");}
+
 }

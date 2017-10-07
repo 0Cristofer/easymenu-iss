@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Autores: Guilherme Quental & Bruno Cesar -->
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="main_pane_" maxHeight="1080.0" maxWidth="1920.0" minHeight="405.0" minWidth="720.0" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bccog.EMM.gui.controladores.SessaoTrabalhoController">
+    <right>
+        <VBox maxWidth="284.0" minWidth="144.0" prefWidth="192.0" BorderPane.alignment="CENTER">
+            <children>
+                <JFXButton fx:id="btn_add_" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" onAction="#add" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Adicionar Pedido" textFill="WHITE" />
+                <JFXButton fx:id="btn_mesas_" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Mesas" textFill="WHITE">
+                    <graphic>
+                        <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/sessao.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></JFXButton>
+                <JFXButton fx:id="btn_historico_" contentDisplay="TOP" layoutX="10.0" layoutY="60.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Historico da Sessao" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/cardapio.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></JFXButton>
+                <JFXButton fx:id="btn_cancelados_" contentDisplay="TOP" layoutX="10.0" layoutY="110.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Cancelados" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/produtos.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></JFXButton>
+                <JFXButton fx:id="btn_ajuda_" contentDisplay="TOP" layoutX="10.0" layoutY="135.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Ajuda" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/promocoes.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></JFXButton>
+                <JFXButton fx:id="btn_bug_" contentDisplay="TOP" layoutX="10.0" layoutY="35.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Reportar um Bug" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/registros.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></JFXButton>
+                <JFXButton fx:id="btn_configuracoes_" contentDisplay="TOP" layoutX="10.0" layoutY="85.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Configurações" textFill="WHITE">
+                    <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@icons/config.png" />
+                            </image>
+                        </ImageView>
+                    </graphic></JFXButton>
+                <JFXButton fx:id="btn_sair_" layoutX="10.0" layoutY="190.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" onAction="#encerrarSessao" prefHeight="540.0" prefWidth="192.0" styleClass="btn_sair_" stylesheets="@stylesheet.css" text="Encerrar Sessão" textFill="WHITE" />
+            </children>
+        </VBox>
+    </right>
+    <center>
+        <GridPane style="-fx-background-color: #e0e0e0;" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="369.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="290.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="290.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="290.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="135.31578947368422" minHeight="10.0" percentHeight="10.0" prefHeight="135.31578947368422" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="90.0" prefHeight="135.31578947368422" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647">
+                    <right>
+                        <Label fx:id="lbl_status_" text="Status_da_conexao" BorderPane.alignment="CENTER">
+                            <BorderPane.margin>
+                                <Insets right="15.0" />
+                            </BorderPane.margin>
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                        </Label>
+                    </right>
+                    <left>
+                        <Label fx:id="lbl_username_" text="Bem vindo(a), Username" BorderPane.alignment="CENTER">
+                            <BorderPane.margin>
+                                <Insets left="10.0" />
+                            </BorderPane.margin>
+                        </Label>
+                    </left>
+                    <bottom>
+                        <GridPane maxHeight="15.0" prefHeight="15.0" BorderPane.alignment="CENTER">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Label text="Pedidos recebidos" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="5.0" />
+                                    </padding>
+                                </Label>
+                                <Label text="Em preparo (Cozinha)" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="5.0" />
+                                    </padding>
+                                </Label>
+                                <Label text="Pronto / Entrega" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="5.0" />
+                                    </padding>
+                                </Label>
+                                <Label text="Finalizados" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="5.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                        </GridPane>
+                    </bottom>
+                    <center>
+                        <Label fx:id="lbl_titulo_" text="Sessao de trabalho aberta a pedidos" BorderPane.alignment="CENTER">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                    </center>
+                </BorderPane>
+                <ScrollPane fx:id="scroll_pane_" fitToWidth="true" hbarPolicy="NEVER" pannable="true" stylesheets="@stylesheet.css" GridPane.rowIndex="1">
+                    <content>
+                        <VBox fx:id="box_recebido" alignment="CENTER" spacing="10.0" style="-fx-background-color: #e0e0e0;">
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="10.0" layoutY="10.0" pannable="true" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <content>
+                        <VBox fx:id="box_preparo" spacing="10.0">
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="202.0" layoutY="10.0" pannable="true" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                    <content>
+                        <VBox fx:id="box_pronto" spacing="10.0">
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" layoutX="394.0" layoutY="10.0" pannable="true" prefHeight="200.0" prefWidth="200.0" stylesheets="@stylesheet.css" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                    <content>
+                        <VBox fx:id="box_finalizado" spacing="10.0">
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </children>
+        </GridPane>
+    </center>
+</BorderPane>

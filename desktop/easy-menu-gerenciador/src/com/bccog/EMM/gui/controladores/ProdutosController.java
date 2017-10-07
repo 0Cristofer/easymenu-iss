@@ -39,13 +39,12 @@ public class ProdutosController implements BaseController {
     public JFXButton btn_del_prod_;
     public JFXComboBox<Categoria> cbox_categorias_;
 
-    public void iniciarSessao(ActionEvent event) {
-    }
-
     public void dadosEstabelecimento(){ controller_.setVisibleScreen("info_estabelecimento");}
 
     public void categorias(){
     }
+
+    public void iniciarSessao(){ controller_.setVisibleScreen("sessao_trabalho");}
 
     @FXML
     public void cadastrarProduto(){

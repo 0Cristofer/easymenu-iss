@@ -32,16 +32,13 @@ public class SelecionaCardapioController implements BaseController {
     public JFXTextField txtf_nome_;
     public JFXButton btn_lista_categorias_;
 
-    @FXML
-    public void iniciarSessao() {
-        controller_.setVisibleScreen("work_screen");
-    }
-
     @FXML public void verCategorias(){
     }
 
     public void categorias(){
     }
+
+    public void iniciarSessao(){ controller_.setVisibleScreen("sessao_trabalho");}
 
     public void dadosEstabelecimento(){ controller_.setVisibleScreen("info_estabelecimento");}
 
