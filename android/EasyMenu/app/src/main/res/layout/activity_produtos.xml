@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:paddingTop="100dp"
-    tools:context="com.bccog.easymenu.gui.ProdutosActivity">
+    tools:context="com.bccog.easymenu.gui.activities.ProdutosActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"

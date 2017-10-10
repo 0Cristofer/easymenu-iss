@@ -1,4 +1,4 @@
-package com.bccog.easymenu.gui;
+package com.bccog.easymenu.gui.activities;
 
 
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.bccog.easymenu.R;
 import com.bccog.easymenu.entidades.pedido.Pedido;
-import com.bccog.easymenu.entidades.pedido.Status;
 import com.bccog.easymenu.entidades.produto.ProdutoComTamanho;
 import com.bccog.easymenu.entidades.produto.ProdutoPedido;
 import com.bccog.easymenu.entidades.produto.ProdutoPrecoUnico;
@@ -17,8 +16,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -147,11 +144,12 @@ public class ProdutosActivity extends AppCompatActivity {
     }
 
     public void order(View view) {
-        Pedido pedido = new Pedido(MainActivity.usuario_atual_.getCliente(), DateTime.now().getMillis(),
+        Pedido pedido = new Pedido();
+        /*Pedido pedido = new Pedido(MainActivity.usuario_atual_.getCliente(), DateTime.now().getMillis(),
                 false, "semcupom", MainActivity.usuario_atual_.getCliente().getEnderecos().get(0),
                 "traz ketchup", Status.RECEBIDO, produtos_pedido, estabelecimento_id);
 
-        pedido.calcularPreco();
+        pedido.calcularPreco();*/
 
         DatabaseReference new_datapedido_reference = datapedido_reference.push();
         String key = new_datapedido_reference.getKey();

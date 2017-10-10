@@ -2,8 +2,8 @@ package com.bccog.easymenu.entidades.cardapio;
 
 /**
  * Representa os possíveis estados de um cardápio
- * @author Cristofer Oswald
- * @since 07/06/17
+ * @author Diogo Almeida
+ * @since 06/10/2017
  */
 public enum CardapioStatus {
     ATIVO("Ativo"), ANALISE("Análise"), DORMINDO("Dormindo"), RECUSADO("Recusado");

@@ -11,16 +11,15 @@ import java.util.List;
 
 /**
  * Classe cardapio agrupa um conjunto de categorias, promoções e outros atributos
- * @author Bruno Cesar
- * @since 03/06/2017
+ * @author Diogo Almeida
+ * @since 06/10/2017
  */
 public class Cardapio extends EntidadeBasica {
-    protected List<Categoria> categorias_;
+    private List<Categoria> categorias_;
 
     private String nome_;
     private CardapioStatus status_;
     private long time_;
-    //TODO promoção
 
     public Cardapio(String nome) {
         this.nome_ = nome;
@@ -43,6 +42,9 @@ public class Cardapio extends EntidadeBasica {
 
     @Exclude
     public List<Categoria> getCategorias() {
+        if(categorias_ == null){
+            categorias_ = new ArrayList<>();
+        }
         return categorias_;
     }
 
@@ -51,6 +53,9 @@ public class Cardapio extends EntidadeBasica {
     }
 
     public void addCategoria(Categoria categoria){
+        if(categorias_ == null){
+            categorias_ = new ArrayList<>();
+        }
         categorias_.add(categoria);
     }
 
@@ -61,16 +66,12 @@ public class Cardapio extends EntidadeBasica {
     /**
      * @return Uma string com o nome de todas as categorias no cardápio
      */
-    public String categoriasToString(){
-        String text = "";
+    public String categoriasToString() {
+        return "";
+    }
 
-        if(categorias_ != null) {
-            for (Categoria c : categorias_) {
-                text = text.concat(c.getNome() + " ");
-            }
-        }
-
-        return text;
+    public DateTime getDateTime(){
+        return new DateTime(time_);
     }
 
     /**
@@ -80,7 +81,12 @@ public class Cardapio extends EntidadeBasica {
     public String toString(){
         String text = nome_ + " : " + status_ + "\n";
         text = text.concat("Categorias: ") + categoriasToString();
-        text = text.concat("\n Ultma alteração em: " + new DateTime(getTime()).toString());
+        text = text.concat("\n Ultma alteração em: " + getDateTime().toString());
         return text;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof Cardapio) && super.equals(obj);
     }
 }

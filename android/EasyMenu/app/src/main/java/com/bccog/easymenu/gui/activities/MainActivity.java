@@ -1,4 +1,4 @@
-package com.bccog.easymenu.gui;
+package com.bccog.easymenu.gui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
