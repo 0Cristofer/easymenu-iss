@@ -58,23 +58,37 @@ public class PedidoCard extends GridPane {
     public PedidoCard(Pedido pedido, SessaoTrabalhoController controller) {
         this.controller_ = controller;
         this.pedido_ = pedido;
+        PedidoCard dis = this;
 
         String css = GUIController.class.getResource("/stylesheet.css").toExternalForm();
 
+        System.out.println(pedido.getCliente().toString());
 
+        DateTime time = pedido_.getDateTime();
 
         //lbl_ID_.setText(pedido_.getId());
 
-        lbl_nome_.setText("Teste da silva");
+        lbl_nome_.setText(pedido_.getCliente().getNome());
         lbl_nome_.setFont(new Font(20));
 
-        lbl_horario_.setText("21:34");
+        lbl_horario_.setText(Integer.toString(time.getHourOfDay()) + ":" + Integer.toString(time.getMinuteOfHour()));
         lbl_horario_.setFont(new Font(18));
 
         lbl_A_.setText("");
-        lbl_preco_.setText("15.00 R$");
+        lbl_preco_.setText(Float.toString(pedido_.getValor()) + "R$");
 
-        pedido_desc_.setText("Cachorro-simples (Adicional de Calabresa), Guaraná Lata.");
+        List<ProdutoPedido> produtos = pedido.getProdutosNoPedido();
+        String desc = "";
+
+        for (ProdutoPedido p: produtos) {
+            if(p.getTamanho() != ProdutoPedido.TamanhoProduto.UNICO){
+                desc = desc.concat(p.getProduto().getNome() + " - " + p.getTamanho().getTamanho() + "\n");
+            } else{
+                desc = desc.concat(p.getProduto().getNome() + "\n");
+            }
+        }
+
+        pedido_desc_.setText(desc);
         pedido_desc_.setFont(new Font(18));
         pedido_desc_.setWrapText(true);
 
@@ -84,7 +98,7 @@ public class PedidoCard extends GridPane {
         btn_aceitar_.getStylesheets().add(css);
         btn_aceitar_.getStyleClass().add("btn_aceitar_");
 
-        btn_aceitar_.setOnAction(event -> System.out.println("Aceitou o pedido!"));
+        btn_aceitar_.setOnAction(event -> controller_.avancaPedido(dis));
 
         ImageView icone_recusar = new ImageView(new Image("/icons/recusar.png"));
         btn_recusar_ = new JFXButton("", icone_recusar);
@@ -92,7 +106,7 @@ public class PedidoCard extends GridPane {
         btn_recusar_.getStylesheets().add(css);
         btn_recusar_.getStyleClass().add("btn_recusar_");
 
-        btn_recusar_.setOnAction(event -> System.out.println("Recusou o pedido!"));
+        btn_recusar_.setOnAction(event -> controller.cancelarPedido(dis));
 
 
         col1.setHalignment(HPos.LEFT);

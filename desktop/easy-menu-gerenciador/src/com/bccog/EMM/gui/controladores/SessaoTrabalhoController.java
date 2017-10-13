@@ -55,6 +55,7 @@ public class SessaoTrabalhoController implements BaseController {
     @FXML
     private void encerrarSessao() {
         controller_.setVisibleScreen("main");
+        GerenciadorPedidos.stopStream();
     }
 
     @Override
@@ -62,6 +63,7 @@ public class SessaoTrabalhoController implements BaseController {
         lbl_username_.setText("Bem vindo, " + EMM.getInstance().getUsuarioAtual().getEstabelecimento().getNome());
         lbl_status_.setText("Conectado");
         lbl_titulo_.setText("Sessão de trabalho aberta a pedidos");
+        GerenciadorPedidos.startStream(pedidos_observable_, 3600000); //Inicia um stream de uma hora
 
     }
 
@@ -69,11 +71,95 @@ public class SessaoTrabalhoController implements BaseController {
     public void init() {
         pedidos_ = new ArrayList<>();
         pedidos_observable_ = FXCollections.observableList(pedidos_);
+        pedidos_observable_.addListener((ListChangeListener<Pedido>) c -> {
+            while (c.next()){
+                for(Pedido pedido : c.getAddedSubList()){
+                    //Adicionar aqui modificações na interface ao receber novos pedidos
+                    System.out.println("pedido adicionado: " + pedido.toString());
+                    PedidoCard card = new PedidoCard(pedido,this);
+                    Platform.runLater(() -> box_recebido.getChildren().addAll(card));
+                }
+            }
+        });
+    }
 
-        //Apenas teste da interface. Na versão final deverá ocorrer via conexão com BD na nuvem
-        Pedido pedidoTeste = new Pedido();
-        PedidoCard cardTeste = new PedidoCard(pedidoTeste,this);
-        box_recebido.getChildren().addAll(cardTeste);
+    public void cancelarPedido(PedidoCard card){
+        Pedido p = card.getPedido();
+        Status s = p.getStatus();
+
+        switch (s){
+            case RECEBIDO:
+                p.setStatus(Status.CANCELADO);
+                card.setPedido(p);
+                box_recebido.getChildren().remove(card);
+                break;
+
+            case PREPARANDO:
+                p.setStatus(Status.CANCELADO);
+                card.setPedido(p);
+                box_preparo.getChildren().remove(card);
+                break;
+
+            default:
+                break;
+
+        }
+    }
+
+    public void avancaPedido(PedidoCard card){
+        Pedido p = card.getPedido();
+        Status s = p.getStatus();
+
+        switch (s){
+            case RECEBIDO:
+                p.setStatus(Status.PREPARANDO);
+                card.setPedido(p);
+                box_recebido.getChildren().remove(card);
+                box_preparo.getChildren().add(card);
+                break;
+
+            case PREPARANDO:
+                p.setStatus(Status.PRONTO);
+                card.removeCancelar();
+                card.setPedido(p);
+                box_preparo.getChildren().remove(card);
+                box_pronto.getChildren().add(card);
+                break;
+
+            case PRONTO:
+                p.setStatus(Status.ENVIADO);
+                card.setPedido(p);
+                box_pronto.getChildren().remove(card);
+                box_finalizado.getChildren().add(card);
+                break;
+
+            case ENVIADO:
+                p.setStatus(Status.ENTREGUE);
+                card.setPedido(p);
+                box_finalizado.getChildren().remove(card);
+                break;
+
+            default:
+                // Indefinido?
+                break;
+        }
+        try {
+            GerenciadorPedidos.atualizarStatusPedido(p);
+        } catch (ForbiddenException e) {
+            e.printStackTrace();
+        } catch (BadRequestException e) {
+            e.printStackTrace();
+        } catch (NotImplementedErrorExcpetion notImplementedErrorExcpetion) {
+            notImplementedErrorExcpetion.printStackTrace();
+        } catch (NotAuthorizedException e) {
+            e.printStackTrace();
+        } catch (InternalServerErrorException e) {
+            e.printStackTrace();
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        } catch (NoConnectionException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
