@@ -58,8 +58,7 @@ public class CardapioController implements BaseController {
 
     public void dadosEstabelecimento(){ controller_.setVisibleScreen("info_estabelecimento");}
 
-    public void categorias(){
-    }
+    public void categorias(){ controller_.setVisibleScreen("categorias");}
 
     @FXML public void voltaseleciona() {controller_.setVisibleScreen("seleciona_cardapio");}
 

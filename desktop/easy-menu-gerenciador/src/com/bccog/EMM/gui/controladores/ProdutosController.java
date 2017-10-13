@@ -41,8 +41,7 @@ public class ProdutosController implements BaseController {
 
     public void dadosEstabelecimento(){ controller_.setVisibleScreen("info_estabelecimento");}
 
-    public void categorias(){
-    }
+    public void categorias(){ controller_.setVisibleScreen("categorias");}
 
     public void iniciarSessao(){ controller_.setVisibleScreen("sessao_trabalho");}
 
