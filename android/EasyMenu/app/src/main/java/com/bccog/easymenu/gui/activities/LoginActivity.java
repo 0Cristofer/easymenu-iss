@@ -1,13 +1,17 @@
 package com.bccog.easymenu.gui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
 import com.bccog.easymenu.R;
+import com.bccog.easymenu.controladores.ControladorUsuario;
+import com.google.firebase.auth.FirebaseAuthException;
 
 /**
  * Controlador da interface de login por email e senha
@@ -16,26 +20,38 @@ import com.bccog.easymenu.R;
  */
 public class LoginActivity extends AppCompatActivity{
 
+    private boolean is_loading_ = false;
+
     //Referências à interface
     private EditText email_view_;
-    private EditText password_view_;
-    private View progress_view_;
-    private View login_form_view_;
+    private EditText senha_view_;
+    private View login_form_;
+    private View progress_form_;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        email_view_ = (EditText) findViewById(R.id.email);
-        password_view_ = (EditText) findViewById(R.id.password);
-        login_form_view_ = findViewById(R.id.login_form);
-        progress_view_ = findViewById(R.id.login_progress);
+        setTitle(getString(R.string.title_login));
 
+        email_view_ = (EditText) findViewById(R.id.email);
+        senha_view_ = (EditText) findViewById(R.id.password);
+        login_form_ = findViewById(R.id.login_form);
+        progress_form_ = findViewById(R.id.progress_form);
+
+        //Configura os botões
         findViewById(R.id.email_sign_in_button).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 logar();
+            }
+        });
+
+        findViewById(R.id.login_social).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginSocial();
             }
         });
 
@@ -46,59 +62,89 @@ public class LoginActivity extends AppCompatActivity{
      * pergunta para criar novo. Se houver erro de senha/login mostra o erro.
      */
     private void logar() {
+        final AppCompatActivity activity = this;
         String email = email_view_.getText().toString();
-        String password = password_view_.getText().toString();
-        boolean cancel = false;
+        String senha = senha_view_.getText().toString();
+        boolean cancelar = false;
         View focusView = null;
 
         //Reseta os erros
         email_view_.setError(null);
-        password_view_.setError(null);
-
-        if (TextUtils.isEmpty(password)) {
-            password_view_.setError(getString(R.string.error_field_required));
-            focusView = password_view_;
-            cancel = true;
-        }
+        senha_view_.setError(null);
 
         if (TextUtils.isEmpty(email)) {
             email_view_.setError(getString(R.string.error_field_required));
             focusView = email_view_;
-            cancel = true;
+            cancelar = true;
+        }
+        else if (TextUtils.isEmpty(senha)) {
+            senha_view_.setError(getString(R.string.error_field_required));
+            focusView = senha_view_;
+            cancelar = true;
         }
 
-        if (cancel) {
+        if (cancelar) {
             //Houve um erro
             focusView.requestFocus();
         } else {
-            //Tenta logar o usuário
+            setLoading(true);
+
+            ControladorUsuario.logarUsuarioComEmail(email, senha, new ControladorUsuario.LogarUsuarioListener() {
+                @Override
+                public void onSuccess() {
+
+                }
+
+                @Override
+                public void onFailure(FirebaseAuthException e) {
+                    Log.d("exce", e.getErrorCode());
+                    if(is_loading_){
+                        setLoading(false);
+                    }
+                }
+
+                @Override
+                public void onClienteLogado() {
+                    startActivity(new Intent(activity, ProdutosActivity.class));
+                    if(is_loading_){
+                        setLoading(false);
+                    }
+                }
+
+                @Override
+                public void onErroCliente() {
+                    if(is_loading_){
+                        setLoading(false);
+                    }
+                }
+            });
         }
     }
 
     /**
-     * Mostra a tela de carregamento
+     * Troca a tela pela de login social
      */
-    /*private void showProgress(final boolean show) {
-        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+    private void loginSocial(){
+        Intent intent = new Intent(this, SocialLoginActivity.class);
+        startActivity(intent);
+    }
 
-        login_form_view_.setVisibility(show ? View.GONE : View.VISIBLE);
-        login_form_view_.animate().setDuration(shortAnimTime).alpha(
-                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                login_form_view_.setVisibility(show ? View.VISIBLE : View.GONE);
-            }
-        });
+    /**
+     * Configura a tela para mostrar a interface de carregamento
+     * @param loading Se deve ser mostrado o carregamento
+     */
+    private void setLoading(boolean loading){
+        is_loading_ = loading;
+        if(loading){
+            progress_form_.setVisibility(View.VISIBLE);
+            login_form_.setVisibility(View.GONE);
 
-        progress_view_.setVisibility(show ? View.VISIBLE : View.GONE);
-        progress_view_.animate().setDuration(shortAnimTime).alpha(
-                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                progress_view_.setVisibility(show ? View.GONE : View.VISIBLE);
-            }
-        });
-    }*/
+        }
+        else{
+            progress_form_.setVisibility(View.GONE);
+            login_form_.setVisibility(View.VISIBLE);
+        }
+    }
 
 }
 

@@ -4,7 +4,7 @@
     android:id="@+id/activity_display_message"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:gravity="center_horizontal"
     android:paddingTop="100dp"

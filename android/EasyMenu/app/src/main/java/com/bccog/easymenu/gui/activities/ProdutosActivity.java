@@ -3,10 +3,12 @@ package com.bccog.easymenu.gui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.bccog.easymenu.R;
+import com.bccog.easymenu.controladores.ControladorCliente;
 import com.bccog.easymenu.entidades.pedido.Pedido;
 import com.bccog.easymenu.entidades.produto.ProdutoComTamanho;
 import com.bccog.easymenu.entidades.produto.ProdutoPedido;
@@ -52,7 +54,7 @@ public class ProdutosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_produtos);
 
         estabelecimento_reference = database.getReference("/estabelecimento/"+estabelecimento_id);
-        cliente_reference = database.getReference("/cliente/" + MainActivity.usuario_atual_.getCliente().getId());
+        cliente_reference = database.getReference("/cliente/" + ControladorCliente.getClienteAtual().getId());
 
         comtamanho_reference = estabelecimento_reference.child(ProdutoComTamanho.class.getSimpleName().toLowerCase());
         unico_reference = estabelecimento_reference.child(ProdutoPrecoUnico.class.getSimpleName().toLowerCase());
@@ -178,4 +180,51 @@ public class ProdutosActivity extends AppCompatActivity {
 
         atualizarTotal();
     }
+
+    @Override
+    protected void onStart() {
+        Log.d("produtos_act", ControladorCliente.getClienteAtual().getNome());
+        super.onStart();
+    }
 }
+
+/* Exemplo de push
+ProdutoComTamanho produto = new ProdutoComTamanho("TAMANHOOOOOOOOOOOOOOOOOOOO",  "dahorissimo", null,
+                "path_foto", 12.2f, 13.4f, 14.5f);
+
+ user_reference = database.getReference("/estabelecimento/" + auth.getCurrentUser().getUid() + "/produtocomtamanho");
+
+        user_reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onClienteLogado(DataSnapshot dataSnapshot) {
+                System.out.println("user: " + dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        data_reference = database.getReference("/produtocomtamanho");
+
+        data_reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onClienteLogado(DataSnapshot dataSnapshot) {
+                System.out.println("data: " + dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        data_reference = data_reference.push();
+        String key = data_reference.getKey();
+        data_reference.setValue(produto);
+        Map<String, Object> map = new HashMap<>();
+        map.put(key, true);
+        user_reference.updateChildren(map);
+
+ */

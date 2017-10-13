@@ -14,18 +14,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".gui.activities.MainActivity">
-        </activity>
-        <activity android:name=".gui.activities.ProdutosActivity" />
+
         <activity android:name=".gui.activities.LoginActivity">
-        </activity>
-        <activity android:name=".gui.activities.SocialLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".gui.activities.ProdutosActivity" />
+        <activity android:name=".gui.activities.SocialLoginActivity"/>
     </application>
 
 </manifest>
