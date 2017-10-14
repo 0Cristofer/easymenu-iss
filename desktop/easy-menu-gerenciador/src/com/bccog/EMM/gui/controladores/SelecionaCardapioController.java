@@ -1,6 +1,9 @@
 package com.bccog.EMM.gui.controladores;
 
-
+import com.bccog.EMM.EMM;
+import com.bccog.EMM.bd.entidades.cardapio.Cardapio;
+import com.bccog.EMM.bd.exceptions.*;
+import com.bccog.EMM.gui.subEntidades.CardapioCard;
 import com.bccog.FXController.BaseController;
 import com.bccog.FXController.ScreenController;
 import com.jfoenix.controls.JFXButton;
@@ -10,13 +13,17 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+
+import java.util.List;
+
+import static com.bccog.EMM.gerenciadores.GerenciadorCardapios.criarCardapio;
 
 /**
  * Controlador da tela de seleção de cardápio
  * @author Diogo Almeida
  * @since 04/10/2017
  */
-
 public class SelecionaCardapioController implements BaseController {
 
     private ScreenController controller_;
@@ -32,17 +39,21 @@ public class SelecionaCardapioController implements BaseController {
     public JFXTextField txtf_nome_;
     public JFXButton btn_lista_categorias_;
 
+    @FXML
+    public void iniciarSessao() {
+        controller_.setVisibleScreen("work_screen");
+    }
+
     @FXML public void verCategorias(){
+        controller_.setVisibleScreen("categorias");
     }
 
-    public void categorias(){
+    public void categorias(){ controller_.setVisibleScreen("categorias");
     }
-
-    public void iniciarSessao(){ controller_.setVisibleScreen("sessao_trabalho");}
 
     public void dadosEstabelecimento(){ controller_.setVisibleScreen("info_estabelecimento");}
 
-    @FXML public void cardapios(){ controller_.setVisibleScreen("seleciona_cardapio");}
+    @FXML public void cardapios(){ /*Esta nesta tela*/ }
 
     @FXML public void produtos(){
         controller_.setVisibleScreen("produtos");
@@ -70,15 +81,48 @@ public class SelecionaCardapioController implements BaseController {
         btn_confirmar_.setVisible(false);
         txtf_nome_.setVisible(false);
         btn_cancelar_.setVisible(false);
+
         txtf_nome_.setText("");
     }
 
     @FXML public void confirmar(){
+        if(!txtf_nome_.getText().equals("")){
+            try {
+                criarCardapio(txtf_nome_.getText());
+            } catch (NoConnectionException | ForbiddenException | BadRequestException | InternalServerErrorException |
+                    NotImplementedErrorExcpetion | NotAuthorizedException | NotFoundException e) {
+                e.printStackTrace();
+            }
+            //TODO pop-up cadastrado com sucesso!
+            cancelar();
+            atualizar();
+        }
     }
 
 
     @Override
     public void atualizar() {
+        List<Cardapio> cardapios = EMM.getInstance().getUsuarioAtual().
+                getEstabelecimento().getCardapios();
+
+        GridPane grid_ = new GridPane();
+
+        if(cardapios == null) return;
+
+        int i = 0;
+        boolean b = true;
+        for (Cardapio c : cardapios) {
+            if(b){
+                grid_.add(new CardapioCard(c),0,i);
+            } else {
+                grid_.add(new CardapioCard(c),1,i);
+                i++;
+            }
+
+            b = !b;
+        }
+
+        scroll_pane_.setContent(grid_);
     }
 
     @Override
@@ -88,6 +132,7 @@ public class SelecionaCardapioController implements BaseController {
 
     @Override
     public void setMainController(ScreenController controller) { controller_ = controller;
+
     }
 
     @Override

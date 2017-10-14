@@ -22,6 +22,7 @@ public class Cardapio extends EntidadeBasica {
     private CardapioStatus status_;
     @SerializedName("time")
     private long time_;
+    //TODO promoção
 
     public Cardapio(String nome) {
         this.nome_ = nome;
@@ -67,8 +68,16 @@ public class Cardapio extends EntidadeBasica {
     /**
      * @return Uma string com o nome de todas as categorias no cardápio
      */
-    public String categoriasToString() {
-        return "";
+    public String categoriasToString(){
+        String text = "";
+
+        if(categorias_ != null) {
+            for (Categoria c : categorias_) {
+                text = text.concat(c.getNome() + " ");
+            }
+        }
+
+        return text;
     }
 
     public DateTime getDateTime(){
