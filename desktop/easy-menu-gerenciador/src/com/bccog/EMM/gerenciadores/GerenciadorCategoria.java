@@ -86,7 +86,7 @@ public class GerenciadorCategoria {
      * @throws NotFoundException Não encontrado
      */
 
-    /**
+
     public static void deletaCategoria(Categoria categoria) throws NoConnectionException, ForbiddenException,
             BadRequestException, NotImplementedErrorExcpetion, InternalServerErrorException, NotFoundException,
             NotAuthorizedException {
@@ -102,7 +102,7 @@ public class GerenciadorCategoria {
 
         usuario.getEstabelecimento().getCategorias().remove(categoria);
     }
-/**
+
     /**
      * Adiciona um produto a uma categora
      * @param categoria A categoria que será modificada

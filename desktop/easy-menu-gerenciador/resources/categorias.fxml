@@ -126,7 +126,7 @@
                 <VBox fillWidth="false" stylesheets="@stylesheet.css" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER">
                     <children>
                         <JFXButton fx:id="btn_new_categoria_" onAction="#criarCategoria" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" text="Criar Categoria" />
-                        <JFXButton fx:id="btn_del_categoria_" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" text="Deletar Categoria" />
+                        <JFXButton fx:id="btn_del_categoria_" onAction="#deletarCategoria" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" text="Deletar Categoria" />
                         <JFXButton fx:id="btn_del_produto_" onAction="#removeProduto" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" text="Remover Produto" />
                         <JFXButton id="btn_cardapio_voltar_" fx:id="btn_voltar_" onAction="#voltainicio" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" stylesheets="@stylesheet.css" text="Voltar" />
                     </children>

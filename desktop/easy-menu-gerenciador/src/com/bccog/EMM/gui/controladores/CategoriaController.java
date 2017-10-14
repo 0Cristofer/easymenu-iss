@@ -171,7 +171,43 @@ public class CategoriaController implements BaseController{
         txt_nome_.setVisible(true);
     }
 
+    @FXML
+    public void deletarCategoria(){
+        if(cbox_categoria_.getSelectionModel().getSelectedItem() == null){
+            return;
+        }
 
+        List<Categoria> categorias = EMM.getInstance().getUsuarioAtual().
+                getEstabelecimento().getCategorias();
+        String nome = (cbox_categoria_.getSelectionModel().getSelectedItem().toString());
+
+        for (Categoria c: categorias) {
+            if(c.getNome().equals(nome)){
+
+                try {
+                    GerenciadorCategoria.deletaCategoria(c);
+                } catch (NoConnectionException e) {
+                    e.printStackTrace();
+                } catch (ForbiddenException e) {
+                    e.printStackTrace();
+                } catch (BadRequestException e) {
+                    e.printStackTrace();
+                } catch (NotImplementedErrorExcpetion notImplementedErrorExcpetion) {
+                    notImplementedErrorExcpetion.printStackTrace();
+                } catch (InternalServerErrorException e) {
+                    e.printStackTrace();
+                } catch (NotFoundException e) {
+                    e.printStackTrace();
+                } catch (NotAuthorizedException e) {
+                    e.printStackTrace();
+                }
+
+                atualizar();
+                return;
+            }
+        }
+
+    }
 
     @Override
     public void atualizar() {

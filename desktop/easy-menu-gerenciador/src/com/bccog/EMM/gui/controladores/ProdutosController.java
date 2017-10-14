@@ -5,6 +5,7 @@ import com.bccog.EMM.bd.entidades.categoria.Categoria;
 import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.exceptions.*;
 import com.bccog.EMM.gerenciadores.GerenciadorProdutos;
+import com.bccog.EMM.gerenciadores.GerenciadorCategoria;
 import com.bccog.EMM.gui.subEntidades.ProdutoView;
 import com.bccog.FXController.BaseController;
 import com.bccog.FXController.ScreenController;
@@ -51,7 +52,27 @@ public class ProdutosController implements BaseController {
     }
 
     @FXML public void addCategoria(){
+        Produto p = selected_prod.getProduto_();
+        try {
+            GerenciadorCategoria.adicionaProdutoCategoria(cbox_categorias_.getValue(), p);
+        } catch (NoConnectionException e) {
+            e.printStackTrace();
+        } catch (ForbiddenException e) {
+            e.printStackTrace();
+        } catch (BadRequestException e) {
+            e.printStackTrace();
+        } catch (NotImplementedErrorExcpetion notImplementedErrorExcpetion) {
+            notImplementedErrorExcpetion.printStackTrace();
+        } catch (InternalServerErrorException e) {
+            e.printStackTrace();
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        } catch (NotAuthorizedException e) {
+            e.printStackTrace();
+        }
 
+        atualizar();
+        btn_del_prod_.setDisable(true);
     }
 
     @FXML public void produtos(){
