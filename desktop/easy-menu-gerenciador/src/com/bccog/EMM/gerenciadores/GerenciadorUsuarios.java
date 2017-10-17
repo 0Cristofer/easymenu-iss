@@ -2,6 +2,8 @@ package com.bccog.EMM.gerenciadores;
 
 import com.bccog.EMM.EMM;
 import com.bccog.EMM.bd.BancoDeDados;
+import com.bccog.EMM.bd.entidades.cardapio.Cardapio;
+import com.bccog.EMM.bd.entidades.categoria.Categoria;
 import com.bccog.EMM.bd.entidades.cliente.Cliente;
 import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.entidades.usuario.Usuario;
@@ -9,6 +11,7 @@ import com.bccog.EMM.bd.exceptions.*;
 import com.bccog.EMM.bd.responses.SingInResponse;
 import com.bccog.EMM.bd.responses.SingUpResponse;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -109,9 +112,35 @@ public class GerenciadorUsuarios {
     private static void carregaDados(Usuario usuario) throws NoConnectionException, ForbiddenException,
             BadRequestException, NotImplementedErrorExcpetion, InternalServerErrorException,
             NotFoundException, NotAuthorizedException {
-
+        List<Cardapio> cardapios = GerenciadorCardapios.getCardapios();
+        List<Categoria> categorias = GerenciadorCategoria.getCategorias();
         List<Produto> produtos = GerenciadorProdutos.getProdutos();
 
+        HashMap<String, Categoria> categoria_hash = new HashMap<>();
+        HashMap<String, Produto> produto_hash = new HashMap<>();
+
+        for(Categoria c : categorias){
+            categoria_hash.put(c.getId(), c);
+        }
+
+        for(Produto p : produtos){
+            produto_hash.put(p.getId(), p);
+        }
+
+        for(Cardapio c : cardapios){
+            for(String key : GerenciadorCategoria.getCategoriasCardapio(c)){
+                c.addCategoria(categoria_hash.get(key));
+            }
+        }
+
+        for(Categoria c : categorias){
+            for(String key : GerenciadorProdutos.getProdutosCategoria(c)){
+                c.addProduto(produto_hash.get(key));
+            }
+        }
+
+        usuario.getEstabelecimento().setCardapios(cardapios);
+        usuario.getEstabelecimento().setCategorias(categorias);
         usuario.getEstabelecimento().setProdutos(produtos);
     }
 }

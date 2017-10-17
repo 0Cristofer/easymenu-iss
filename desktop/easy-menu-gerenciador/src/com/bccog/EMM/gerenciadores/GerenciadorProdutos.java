@@ -1,6 +1,7 @@
 package com.bccog.EMM.gerenciadores;
 
 import com.bccog.EMM.EMM;
+import com.bccog.EMM.bd.entidades.categoria.Categoria;
 import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.entidades.produto.ProdutoComTamanho;
 import com.bccog.EMM.bd.entidades.produto.ProdutoPrecoUnico;
@@ -12,6 +13,7 @@ import com.bccog.EMM.gerenciadores.exceptions.NegativePriceException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Classe gerenciadora de produtos
@@ -37,6 +39,18 @@ public class GerenciadorProdutos {
         produtos.addAll(gerenciador_pu.get());
 
         return produtos;
+    }
+
+    static Set<String> getProdutosCategoria(Categoria c){
+        Set<String> keys;
+
+        keys = gerenciador_pu.getKeys(c.getClass().getSimpleName().toLowerCase() + "/" +
+                c.getId() + "/" + ProdutoPrecoUnico.class.getSimpleName().toLowerCase() + "/");
+
+        keys.addAll(gerenciador_pt.getKeys(c.getClass().getSimpleName().toLowerCase() + "/" +
+                c.getId() + "/" + ProdutoComTamanho.class.getSimpleName().toLowerCase() + "/"));
+
+        return keys;
     }
 
 
