@@ -2,14 +2,21 @@
 
 <!-- Autor: Diogo Almeida -->
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<BorderPane fx:id="main_pane_" maxHeight="1080.0" maxWidth="1920.0" minHeight="405.0" minWidth="720.0" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bccog.EMM.gui.controladores.SelecionaCardapioController">
+
+<BorderPane fx:id="main_pane_" maxHeight="1080.0" maxWidth="1920.0" minHeight="405.0" minWidth="720.0" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bccog.EMM.gui.controladores.SelecionaCardapioController">
    <right>
       <VBox maxWidth="284.0" minWidth="144.0" prefWidth="192.0" BorderPane.alignment="CENTER">
       <children>
@@ -17,7 +24,7 @@
             <font>
                <Font size="15.0" />
             </font></JFXButton>
-         <JFXButton onAction="#iniciarSessao" fx:id="btn_iniciar_sessao_" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Iniciar Sessão" textFill="WHITE">
+         <JFXButton fx:id="btn_iniciar_sessao_" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" onAction="#iniciarSessao" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Iniciar Sessão" textFill="WHITE">
             <graphic>
                <ImageView id="icon" fitHeight="20.0" fitWidth="20.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -41,7 +48,7 @@
                   </image>
                </ImageView>
             </graphic></JFXButton>
-         <JFXButton fx:id="btn_promocoes_" onAction="#categorias" contentDisplay="TOP" layoutX="10.0" layoutY="135.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Categorias" textFill="WHITE">
+         <JFXButton fx:id="btn_promocoes_" contentDisplay="TOP" layoutX="10.0" layoutY="135.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" onAction="#categorias" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Categorias" textFill="WHITE">
             <graphic>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -49,7 +56,7 @@
                   </image>
                </ImageView>
             </graphic></JFXButton>
-         <JFXButton fx:id="btn_registros_" onAction="#dadosEstabelecimento" contentDisplay="TOP" layoutX="10.0" layoutY="35.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Estabelecimento" textFill="WHITE">
+         <JFXButton fx:id="btn_registros_" contentDisplay="TOP" layoutX="10.0" layoutY="35.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" onAction="#dadosEstabelecimento" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Estabelecimento" textFill="WHITE">
             <graphic>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                   <image>
@@ -57,7 +64,7 @@
                   </image>
                </ImageView>
             </graphic></JFXButton>
-         <JFXButton fx:id="btn_configuracoes_" contentDisplay="TOP" layoutX="10.0" layoutY="85.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Configurações" textFill="WHITE">
+         <JFXButton fx:id="btn_configuracoes_" contentDisplay="TOP" layoutX="10.0" layoutY="85.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" onAction="#historico" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="historico e estatisticas" textFill="WHITE">
             <graphic>
                <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                   <image>

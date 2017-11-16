@@ -33,7 +33,7 @@ public class MainController implements BaseController {
 
     public void categorias(){ controller_.setVisibleScreen("categorias");}
 
-
+    public void historico(){ controller_.setVisibleScreen("historico");}
 
     public void sair(){
         Platform.exit();

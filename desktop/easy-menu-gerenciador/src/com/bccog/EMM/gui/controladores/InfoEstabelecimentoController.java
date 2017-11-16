@@ -84,6 +84,8 @@ public class InfoEstabelecimentoController implements BaseController{
         controller_.setVisibleScreen("info_estabelecimento");
     }
 
+    public void historico(){ controller_.setVisibleScreen("historico");}
+
     public void categorias(){
 
     }

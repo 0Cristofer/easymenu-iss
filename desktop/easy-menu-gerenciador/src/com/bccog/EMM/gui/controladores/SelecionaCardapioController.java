@@ -59,6 +59,8 @@ public class SelecionaCardapioController implements BaseController {
         controller_.setVisibleScreen("produtos");
     }
 
+    public void historico(){ controller_.setVisibleScreen("historico");}
+
     @FXML public void inicio(){
         controller_.setVisibleScreen("main");
     }

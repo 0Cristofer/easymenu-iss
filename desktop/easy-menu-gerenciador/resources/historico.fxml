@@ -3,11 +3,11 @@
 <!-- Autores: Guilherme Quental & Bruno Cesar -->
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="main_pane_" maxHeight="1080.0" maxWidth="1920.0" minHeight="405.0" minWidth="720.0" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bccog.EMM.gui.controladores.ProdutosController">
+<BorderPane fx:id="main_pane_" maxHeight="1080.0" maxWidth="1920.0" minHeight="405.0" minWidth="720.0" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bccog.EMM.gui.controladores.HistoricoController">
    <right>
       <VBox maxWidth="284.0" minWidth="144.0" prefWidth="192.0" BorderPane.alignment="CENTER">
          <children>
@@ -88,47 +88,75 @@
          <rowConstraints>
             <RowConstraints maxHeight="135.31578947368422" minHeight="10.0" percentHeight="10.0" prefHeight="135.31578947368422" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="248.84210526315786" minHeight="10.0" percentHeight="10.0" prefHeight="13.000000000000007" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="349.0" minHeight="10.0" percentHeight="60.0" prefHeight="349.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="349.0" minHeight="10.0" percentHeight="80.0" prefHeight="349.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label fx:id="lbl_titulo_" text="Produtos" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER">
+            <Label fx:id="lbl_titulo_" text="Historico de pedidos" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER">
                <font>
                   <Font size="32.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="txtf_busca_" prefHeight="23.0" prefWidth="306.0" promptText="Busca" GridPane.rowIndex="1">
+            <JFXTreeTableView fx:id="pedidos_view_" styleClass="card" stylesheets="@stylesheet.css" GridPane.columnSpan="2" GridPane.rowIndex="2">
                <GridPane.margin>
-                  <Insets left="15.0" />
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
                </GridPane.margin>
-            </JFXTextField>
-            <GridPane GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
-               </rowConstraints>
+            </JFXTreeTableView>
+            <JFXDatePicker fx:id="date_picker" editable="false" showWeekNumbers="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+            </JFXDatePicker>
+            <Label alignment="CENTER" text="Selecione a data:" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets right="5.0" />
+               </GridPane.margin>
+            </Label>
+            <GridPane styleClass="card" stylesheets="@stylesheet.css" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </GridPane.margin>
                <children>
-                  <JFXTreeTableView fx:id="produto_view_" styleClass="card" stylesheets="@stylesheet.css">
+                  <Label fx:id="lbl_id" text="Pedido n° XXXX" GridPane.halignment="CENTER">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_data_recebido" text="XX/YY as WW:ZZ" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                  <Label fx:id="lbl_cliente_nome" text="Cliente: Nome de exemplo da silva" wrapText="true" GridPane.columnSpan="2147483647" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
-                        <Insets left="10.0" right="10.0" />
+                        <Insets left="10.0" />
                      </GridPane.margin>
-                  </JFXTreeTableView>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="txtf_desc" editable="false" prefHeight="200.0" prefWidth="200.0" promptText="Descriçao do pedido" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextArea>
+                  <Label fx:id="lbl_finalizado" text="Finalizado as WW:ZZ" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+                  <Label fx:id="lbl_valor" text="Valor total R$ XXX,XX" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
-            <JFXButton fx:id="btn_cadastrar_prod_" buttonType="RAISED" onAction="#cadastrarProduto" prefHeight="40.0" style="-fx-background-color: #757575;" text="Cadastrar novo Produto" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <JFXButton fx:id="btn_add_categoria_" buttonType="RAISED" layoutX="78.0" layoutY="492.0" onAction="#addCategoria" prefHeight="40.0" style="-fx-background-color: #757575;" text="Adicionar a categoria" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="btn_del_prod_" buttonType="RAISED" disable="true" layoutX="312.0" layoutY="492.0" onAction="#deletarProduto" prefHeight="40.0" style="-fx-background-color: #757575;" text="Deletar Produto" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <JFXComboBox fx:id="cbox_categorias_" prefHeight="25.0" prefWidth="162.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
-               <GridPane.margin>
-                  <Insets left="10.0" />
-               </GridPane.margin>
-            </JFXComboBox>
          </children>
       </GridPane>
    </center>

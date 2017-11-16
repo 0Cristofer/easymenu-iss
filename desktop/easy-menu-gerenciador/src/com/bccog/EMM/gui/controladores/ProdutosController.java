@@ -51,6 +51,8 @@ public class ProdutosController implements BaseController {
         controller_.setVisibleScreen("cadastro_produto");
     }
 
+    public void historico(){ controller_.setVisibleScreen("historico");}
+
     @FXML public void addCategoria(){
         Produto p = selected_prod.getProduto_();
         try {
