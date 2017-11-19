@@ -30,8 +30,15 @@ public class ControladorCliente {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //Verifica se o caminho para o usuário logado existe no BD
                 if(!dataSnapshot.exists()){
+                    Cliente cliente;
                     //Se não existe, cria
-                    Cliente cliente = new Cliente(ControladorUsuario.getAcct().getDisplayName(), null, null, null);
+                    if(ControladorUsuario.getAcct() !=null){
+                        cliente = new Cliente(ControladorUsuario.getAcct().getDisplayName(), null, null, null);
+
+                    }
+                    else{
+                        cliente = new Cliente("nomezao", null, null, null);
+                    }
                     cliente.setId(id);
                     cliente_atual_ = cliente;
 

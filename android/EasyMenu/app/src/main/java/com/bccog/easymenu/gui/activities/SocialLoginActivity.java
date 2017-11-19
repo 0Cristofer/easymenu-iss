@@ -106,7 +106,7 @@ public class SocialLoginActivity extends AppCompatActivity
      */
     private void receberResutado(GoogleSignInResult result) {
         final AppCompatActivity activity = this;
-        Log.d(TAG, "resultado:" + result.isSuccess());
+        Log.d(TAG, "resultado:" + result.getStatus().getStatusCode());
         setLoading(true);
 
         if (result.isSuccess()) {
@@ -127,7 +127,8 @@ public class SocialLoginActivity extends AppCompatActivity
 
                         @Override
                         public void onClienteLogado() {
-                            startActivity(new Intent(activity, ProdutosActivity.class));
+                            startActivity(new Intent(activity, SelEstActivity.class));
+                            Log.d("exce", "foi");
                             if(is_loading_){
                                 setLoading(false);
                             }

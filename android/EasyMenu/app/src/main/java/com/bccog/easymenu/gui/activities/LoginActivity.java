@@ -105,7 +105,7 @@ public class LoginActivity extends AppCompatActivity{
 
                 @Override
                 public void onClienteLogado() {
-                    startActivity(new Intent(activity, ProdutosActivity.class));
+                    startActivity(new Intent(activity, SelEstActivity.class));
                     if(is_loading_){
                         setLoading(false);
                     }

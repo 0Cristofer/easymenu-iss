@@ -25,4 +25,7 @@
     <!-- Strings da tela de login social -->
     <string name="title_social">Login Social</string>
     <string name="easy_menu_logo">Easy Menu Logo</string>
+    <string name="nome_est">Estabelecimento</string>
+    <string name="endereco">Endereço</string>
+    <string name="aberto">Aberto</string>
 </resources>
