@@ -54,7 +54,7 @@ public class CardapioController implements BaseController {
     }
 
     public void iniciarSessao(ActionEvent event) {
-        controller_.setVisibleScreen("work_screen");
+        controller_.setVisibleScreen("sessao_trabalho");
     }
 
     @FXML public void produtos(){
