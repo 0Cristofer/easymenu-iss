@@ -1,12 +1,7 @@
 package com.bccog.EMM.gui.controladores;
 
-import com.bccog.EMM.EMM;
-import com.bccog.EMM.bd.entidades.categoria.Categoria;
 import com.bccog.EMM.bd.entidades.pedido.Pedido;
-import com.bccog.EMM.bd.entidades.produto.Produto;
-import com.bccog.EMM.bd.exceptions.*;
-import com.bccog.EMM.gerenciadores.GerenciadorCategoria;
-import com.bccog.EMM.gerenciadores.GerenciadorProdutos;
+import com.bccog.EMM.gui.subEntidades.PedidoView;
 import com.bccog.EMM.gui.subEntidades.ProdutoView;
 import com.bccog.FXController.BaseController;
 import com.bccog.FXController.ScreenController;
@@ -19,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.BorderPane;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,17 +24,15 @@ import java.util.List;
  */
 public class HistoricoController implements BaseController {
     private ScreenController controller_;
-    private ProdutoView selected_prod;
+    private PedidoView selected_pedido_;
 
     @FXML
     public BorderPane main_pane_;
     public JFXButton btn_produtos_;
-    public JFXTreeTableView<ProdutoView> pedidos_view_;
-    public JFXButton btn_cadastrar_prod_;
+    public JFXTreeTableView<PedidoView> pedidos_view_;
     public JFXTextField txtf_busca_;
     public JFXButton btn_add_categoria_;
     public JFXButton btn_del_prod_;
-    public JFXComboBox<Categoria> cbox_categorias_;
 
     public void dadosEstabelecimento(){ controller_.setVisibleScreen("info_estabelecimento");}
 
@@ -68,59 +62,62 @@ public class HistoricoController implements BaseController {
     @Override
     public void atualizar() {
 
-        /*JFXTreeTableColumn<ProdutoView, String> horarioCol = new JFXTreeTableColumn<>("Horario");
-        horarioCol.setPrefWidth(250);
-        horarioCol.setCellValueFactory(param -> param.getValue().getValue().horarioProperty());
+        JFXTreeTableColumn<PedidoView, String> idCol = new JFXTreeTableColumn<>("ID");
+        idCol.setPrefWidth(50);
+        idCol.setCellValueFactory(param -> param.getValue().getValue().id_Property());
 
-        JFXTreeTableColumn<ProdutoView, String> idCol = new JFXTreeTableColumn<>("ID");
-        idCol.setPrefWidth(250);
-        idCol.setCellValueFactory(param -> param.getValue().getValue().idProperty());
+        JFXTreeTableColumn<PedidoView, String> horarioCol = new JFXTreeTableColumn<>("H. Recebido");
+        horarioCol.setPrefWidth(150);
+        horarioCol.setCellValueFactory(param -> param.getValue().getValue().horario_recebido_Property());
 
-        JFXTreeTableColumn<ProdutoView, String> nomeCol = new JFXTreeTableColumn<>("Cliente");
-        nomeCol.setPrefWidth(200);
-        nomeCol.setCellValueFactory(param -> param.getValue().getValue().nomeProperty());
+        JFXTreeTableColumn<PedidoView, String> horarioFCol = new JFXTreeTableColumn<>("H. Finalizado");
+        horarioFCol.setPrefWidth(150);
+        horarioFCol.setCellValueFactory(param -> param.getValue().getValue().horario_finalizado_Property());
 
-        JFXTreeTableColumn<ProdutoView, String> valorCol = new JFXTreeTableColumn<>("Valor");
-        valorCol.setPrefWidth(250);
-        valorCol.setCellValueFactory(param -> param.getValue().getValue().valorProperty());*/
+        JFXTreeTableColumn<PedidoView, String> nomeCol = new JFXTreeTableColumn<>("Cliente");
+        nomeCol.setPrefWidth(300);
+        nomeCol.setCellValueFactory(param -> param.getValue().getValue().cliente_nome_Property());
+
+        JFXTreeTableColumn<PedidoView, String> valorCol = new JFXTreeTableColumn<>("Valor");
+        valorCol.setPrefWidth(150);
+        valorCol.setCellValueFactory(param -> param.getValue().getValue().valor_Property());
 
 
-
-        /*JFXTreeTableColumn<ProdutoView, String> tagsCol = new JFXTreeTableColumn<>("Tags");
-        tagsCol.setPrefWidth(200);
-        tagsCol.setCellValueFactory(param -> param.getValue().getValue().tagsTextProperty());*/
-
-        /*List<Pedido> pedidos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getPedidos(); //todo
-        ObservableList<ProdutoView> produtosv = FXCollections.observableArrayList();
+        //List<Pedido> pedidos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getPedidos(); //todo
+        List<Pedido> pedidos = new ArrayList<>();
+        ObservableList<PedidoView> pedidosv = FXCollections.observableArrayList();
 
         for (Pedido p : pedidos) {
-            produtosv.add(new ProdutoView(p));
+            pedidosv.add(new PedidoView(p));
         }
 
-        final TreeItem<ProdutoView> root = new RecursiveTreeItem<>(produtosv, RecursiveTreeObject::getChildren);
-        pedidos_view_.getColumns().setAll(idCol, nomeCol, horarioCol, valorCol);
+        final TreeItem<PedidoView> root = new RecursiveTreeItem<>(pedidosv, RecursiveTreeObject::getChildren);
+        pedidos_view_.getColumns().setAll(idCol, nomeCol, valorCol, horarioCol, horarioFCol);
         pedidos_view_.setRoot(root);
         pedidos_view_.setShowRoot(false);
 
         // Adiciona um listener ao treeTableView :
-        // Se um produto é selecionado selected_prod é atualizado
+        // Se um pedido e atualizado deve atualizar a exibiçao
         pedidos_view_.getSelectionModel().selectedItemProperty().
                 addListener((obs, oldSelection, newSelection)  -> {
                 if (newSelection != null){
-                    selected_prod = newSelection.getValue();
-                    btn_del_prod_.setDisable(false);
-                    btn_add_categoria_.setDisable(false);
+                    selected_pedido_ = newSelection.getValue();
+                    display(selected_pedido_);
                 } else {
-                    btn_del_prod_.setDisable(true);
-                    btn_add_categoria_.setDisable(true);
+                    selected_pedido_ = null;
                 }
         });
 
-        txtf_busca_.textProperty().addListener((observable, oldValue, newValue) -> pedidos_view_
+        /*txtf_busca_.textProperty().addListener((observable, oldValue, newValue) -> pedidos_view_
                 .setPredicate(produtoViewTreeItem -> produtoViewTreeItem.getValue().nomeProperty()
                         .getValue().contains(newValue)));*/
     }
 
+
+    public void display(PedidoView pv){
+        Pedido p = pv.getPedido_();
+
+    }
 
     @Override
     public void init() {

@@ -25,6 +25,8 @@ public class Pedido extends EntidadeBasica {
         private String estabelecimento_id_;
         @SerializedName("timestamp")
         private long timestamp_;
+        @SerializedName("timestampFinal")
+        private long timestamp_final_;
         @SerializedName("delivery")
         private boolean delivery_;
         @SerializedName("cupom")
@@ -59,7 +61,15 @@ public class Pedido extends EntidadeBasica {
             this.estabelecimento_ = estabelecimento;
         }
 
-        public String getClienteId() {
+    public long getTimestamp_final_() {
+        return timestamp_final_;
+    }
+
+    public void setTimestamp_final_(long timestamp_final_) {
+        this.timestamp_final_ = timestamp_final_;
+    }
+
+    public String getClienteId() {
             return cliente_id_;
         }
 
