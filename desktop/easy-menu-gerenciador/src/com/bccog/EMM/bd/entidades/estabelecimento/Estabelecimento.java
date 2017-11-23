@@ -6,6 +6,7 @@ import com.bccog.EMM.bd.entidades.categoria.Categoria;
 import com.bccog.EMM.bd.entidades.embutido.Delivery;
 import com.bccog.EMM.bd.entidades.embutido.Endereco;
 import com.bccog.EMM.bd.entidades.embutido.HorarioAtendimento;
+import com.bccog.EMM.bd.entidades.pedido.Pedido;
 import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.entidades.review.Review;
 import com.google.gson.annotations.SerializedName;
@@ -23,6 +24,7 @@ public abstract class Estabelecimento extends EntidadeBasica {
     private transient List<Cardapio> cardapios_;
     private transient List<Categoria> categorias_;
     private transient List<Produto> produtos_;
+    private transient List<Pedido> pedidos_;
 
     @SerializedName("nome")
     private String nome_;
@@ -146,6 +148,14 @@ public abstract class Estabelecimento extends EntidadeBasica {
 
     public void addProduto(Produto produto){
         produtos_.add(produto);
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos_;
+    }
+
+    public void setPedidos(List<Pedido> pedidos_) {
+        this.pedidos_ = pedidos_;
     }
 
     public List<Categoria> getCategorias(){

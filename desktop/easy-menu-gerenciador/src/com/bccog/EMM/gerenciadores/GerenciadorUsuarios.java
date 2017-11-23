@@ -142,5 +142,6 @@ public class GerenciadorUsuarios {
         usuario.getEstabelecimento().setCardapios(cardapios);
         usuario.getEstabelecimento().setCategorias(categorias);
         usuario.getEstabelecimento().setProdutos(produtos);
+        usuario.getEstabelecimento().setPedidos(GerenciadorPedidos.getPedidos());
     }
 }

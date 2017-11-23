@@ -2,7 +2,9 @@ package com.bccog.EMM.gerenciadores;
 
 import com.bccog.EMM.EMM;
 import com.bccog.EMM.bd.BancoDeDados;
+import com.bccog.EMM.bd.entidades.estabelecimento.Estabelecimento;
 import com.bccog.EMM.bd.entidades.pedido.Pedido;
+import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.entidades.produto.ProdutoComTamanho;
 import com.bccog.EMM.bd.entidades.produto.ProdutoPedido;
 import com.bccog.EMM.bd.entidades.produto.ProdutoPrecoUnico;
@@ -16,8 +18,10 @@ import javafx.collections.ObservableList;
 import org.jdeferred.ProgressCallback;
 import org.restonfire.responses.StreamingEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Gerenciador de pedidos
@@ -86,9 +90,16 @@ public class GerenciadorPedidos {
 
             object = gson.fromJson(element.toString(), Pedido.class);
             object.setId(key);
+            object.setCliente(GerenciadorUsuarios.carregaCliente(object.getClienteId()));
 
             int i = 0;
-            for(ProdutoPedido p : object.getProdutosNoPedido()){
+            List<ProdutoPedido> ProdutosNoPedido = object.getProdutosNoPedido();
+
+            if(ProdutosNoPedido == null){
+                return null; //TODO JUnit Assert
+            }
+
+            for(ProdutoPedido p : ProdutosNoPedido){
                 if(p.getTamanho() == ProdutoPedido.TamanhoProduto.UNICO){
                     p.setProduto(gson.fromJson(element.getAsJsonObject().
                             get("produtosNoPedido").getAsJsonArray().get(i).
@@ -101,6 +112,8 @@ public class GerenciadorPedidos {
                 }
                 i = i + 1;
             }
+
+            //object.setProdutosNoPedido();
 
             return object;
 
@@ -117,7 +130,18 @@ public class GerenciadorPedidos {
      * @return A lista de pedidos
      */
     public static List<Pedido> getPedidos(){
-        return gerenciador.get();
+        List<Pedido> pedidos = new ArrayList<>();
+
+        Set<String> keys = gerenciador.getKeys(Estabelecimento.class.getSimpleName().toLowerCase() + "/"
+                + EMM.getInstance().getUsuarioAtual().getEstabelecimento().getId() + "/" + Pedido.class.getSimpleName().toLowerCase() + "/");
+
+        System.out.println("Pedidos Keys size = " + keys.size());
+
+        for (String key: keys) {
+            pedidos.add(getPedido(key));
+        }
+
+        return pedidos;
     }
 
     /**
