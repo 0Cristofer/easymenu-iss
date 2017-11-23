@@ -1,11 +1,15 @@
 package com.bccog.easymenu.gui.adapters;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.bccog.easymenu.R;
+import com.bccog.easymenu.controladores.ControladorEstabelecimento;
 import com.bccog.easymenu.entidades.estabelecimento.Estabelecimento;
+import com.bccog.easymenu.gui.activities.SelProdutoActivity;
 import com.bccog.easymenu.gui.holders.EstabelecimentoHolder;
 
 import java.util.List;
@@ -28,11 +32,18 @@ public class EstabelecimentoAdapter extends RecyclerView.Adapter<Estabelecimento
     }
 
     @Override
-    public void onBindViewHolder(EstabelecimentoHolder holder, int position) {
-        Estabelecimento atual = estabelecimentos.get(position);
+    public void onBindViewHolder(final EstabelecimentoHolder holder, int position) {
+        final Estabelecimento atual = estabelecimentos.get(position);
         holder.nome.setText(atual.getNome());
         holder.endereco.setText(atual.getEndereco().getRua() + " " + atual.getEndereco().getNumero());
         holder.aberto.setText(atual.getNome());
+        holder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ControladorEstabelecimento.setAtual(atual);
+                holder.itemView.getContext().startActivity(new Intent(holder.itemView.getContext(), SelProdutoActivity.class));
+            }
+        });
     }
 
     @Override

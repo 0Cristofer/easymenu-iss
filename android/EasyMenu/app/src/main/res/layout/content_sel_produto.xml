@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.bccog.easymenu.gui.activities.SelEstActivity"
-    tools:showIn="@layout/activity_sel_est">
+    tools:context="com.bccog.easymenu.gui.activities.SelProdutoActivity"
+    tools:showIn="@layout/activity_sel_produto">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_layout_est"
+        android:id="@+id/recycler_view_layout_prod"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/it_estabelecimento"/>
+        tools:listitem="@layout/it_produto" />
 
 </android.support.constraint.ConstraintLayout>

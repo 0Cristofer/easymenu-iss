@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.bccog.easymenu.R;
+import com.bccog.easymenu.controladores.ControladorEstabelecimento;
 import com.bccog.easymenu.controladores.ControladorUsuario;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -127,11 +128,20 @@ public class SocialLoginActivity extends AppCompatActivity
 
                         @Override
                         public void onClienteLogado() {
-                            startActivity(new Intent(activity, SelEstActivity.class));
-                            Log.d("exce", "foi");
-                            if(is_loading_){
-                                setLoading(false);
-                            }
+                            ControladorEstabelecimento.carregaEstabelecimentos(new ControladorEstabelecimento.EstabelecimentoListener() {
+                                @Override
+                                public void onCarregado() {
+                                    startActivity(new Intent(activity, SelEstActivity.class));
+                                    if(is_loading_){
+                                        setLoading(false);
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelado() {
+
+                                }
+                            });
                         }
 
                         @Override

@@ -17,6 +17,7 @@ import javafx.scene.layout.BorderPane;
  * @author Bruno Cesar
  * @since 24/05/2017
  */
+
 public class MainController implements BaseController {
     public Label lbl_bemvindo_;
     private ScreenController controller_;
@@ -27,6 +28,10 @@ public class MainController implements BaseController {
     public Label lbl_produto_vend;
     public Label lbl_total_produtos;
     public Label lbl_lucro;
+    public Button btn_gerenciador_cupons;
+//    public JFXTreeTableView<CuponsView> cupom_view_;
+
+
 
     public void produtos(){
         controller_.setVisibleScreen("produtos");
@@ -40,6 +45,8 @@ public class MainController implements BaseController {
 
     public void historico(){ controller_.setVisibleScreen("historico");}
 
+    public void gerenciador_cupons(){ controller_.setVisibleScreen("cupons"); }
+
     public void sair(){
         Platform.exit();
     }
@@ -47,6 +54,7 @@ public class MainController implements BaseController {
     @Override
     public void atualizar() {
         lbl_bemvindo_.setText("Bem vindo, " + EMM.getInstance().getUsuarioAtual().getEstabelecimento().getNome());
+
     }
 
     @Override

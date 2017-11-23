@@ -25,8 +25,10 @@
         <activity android:name=".gui.activities.SocialLoginActivity" />
         <activity
             android:name=".gui.activities.SelEstActivity"
-            android:label="@string/title_activity_sel_est"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:label="@string/title_activity_sel_est" />
+        <activity
+            android:name=".gui.activities.SelProdutoActivity"
+            android:label="@string/title_activity_sel_produto" />
     </application>
 
 </manifest>

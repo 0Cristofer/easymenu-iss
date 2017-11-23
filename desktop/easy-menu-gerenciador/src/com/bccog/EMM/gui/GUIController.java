@@ -61,6 +61,9 @@ public class GUIController {
                 GUIController.class.getResource("/categorias.fxml"));
         main_controller.loadScreen("historico",
                 GUIController.class.getResource("/historico.fxml"));
+        main_controller.loadScreen("cupons",
+                GUIController.class.getResource("/cupons.fxml"));
+
 
         main_controller.setInitialScreen("login");
     }
