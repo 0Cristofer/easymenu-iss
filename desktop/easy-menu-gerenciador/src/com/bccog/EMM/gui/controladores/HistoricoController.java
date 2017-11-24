@@ -90,7 +90,7 @@ public class HistoricoController implements BaseController {
 
         List<Pedido> pedidos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getPedidos();
         ObservableList<PedidoView> pedidosv = FXCollections.observableArrayList();
-
+        System.out.println(pedidos.size());
         for (Pedido p : pedidos) {
             pedidosv.add(new PedidoView(p));
         }

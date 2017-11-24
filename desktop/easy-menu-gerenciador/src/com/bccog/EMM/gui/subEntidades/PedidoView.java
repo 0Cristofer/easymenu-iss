@@ -25,6 +25,7 @@ public class PedidoView extends RecursiveTreeObject<PedidoView> {
 
     public PedidoView(Pedido pedido) {
         pedido_ = pedido;
+
         dt_recebido = new DateTime(pedido_.getTimestamp());
         dt_finalizado = new DateTime(pedido_.getTimestamp_final_());
 

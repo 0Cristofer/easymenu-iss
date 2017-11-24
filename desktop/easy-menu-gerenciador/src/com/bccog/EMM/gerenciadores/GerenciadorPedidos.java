@@ -95,22 +95,20 @@ public class GerenciadorPedidos {
             int i = 0;
             List<ProdutoPedido> ProdutosNoPedido = object.getProdutosNoPedido();
 
-            if(ProdutosNoPedido == null){
-                return null; //TODO JUnit Assert
-            }
+            if(ProdutosNoPedido != null) {
 
-            for(ProdutoPedido p : ProdutosNoPedido){
-                if(p.getTamanho() == ProdutoPedido.TamanhoProduto.UNICO){
-                    p.setProduto(gson.fromJson(element.getAsJsonObject().
-                            get("produtosNoPedido").getAsJsonArray().get(i).
-                            getAsJsonObject().get("produto").toString(), ProdutoPrecoUnico.class));
+                for (ProdutoPedido p : ProdutosNoPedido) {
+                    if (p.getTamanho() == ProdutoPedido.TamanhoProduto.UNICO) {
+                        p.setProduto(gson.fromJson(element.getAsJsonObject().
+                                get("produtosNoPedido").getAsJsonArray().get(i).
+                                getAsJsonObject().get("produto").toString(), ProdutoPrecoUnico.class));
+                    } else {
+                        p.setProduto(gson.fromJson(element.getAsJsonObject().
+                                get("produtosNoPedido").getAsJsonArray().get(i).
+                                getAsJsonObject().get("produto").toString(), ProdutoComTamanho.class));
+                    }
+                    i = i + 1;
                 }
-                else{
-                    p.setProduto(gson.fromJson(element.getAsJsonObject().
-                            get("produtosNoPedido").getAsJsonArray().get(i).
-                            getAsJsonObject().get("produto").toString(), ProdutoComTamanho.class));
-                }
-                i = i + 1;
             }
 
             //object.setProdutosNoPedido();
