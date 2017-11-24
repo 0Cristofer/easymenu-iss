@@ -183,6 +183,15 @@ public abstract class Estabelecimento extends EntidadeBasica {
         reviews_.add(review);
     }
 
+    public int numeroCategorias(){
+        return categorias_.size();
+    }
+
+    public int numeroProdutos(){
+        return produtos_.size();
+    }
+
+
     @Override
     public boolean equals(Object obj) {
         return (obj instanceof Estabelecimento) && super.equals(obj);
