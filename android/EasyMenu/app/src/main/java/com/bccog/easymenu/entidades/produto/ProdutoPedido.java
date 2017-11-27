@@ -1,6 +1,7 @@
 package com.bccog.easymenu.entidades.produto;
 
 import com.bccog.easymenu.entidades.EntidadeBasica;
+import com.google.firebase.database.Exclude;
 
 /**
  * Produto que é pedido pelo cliente
@@ -9,7 +10,8 @@ import com.bccog.easymenu.entidades.EntidadeBasica;
  */
 public class ProdutoPedido extends EntidadeBasica {
     private String pedido_;
-    private Produto produto_;
+    private Produto produto_o_;
+    private String produto;
     private TamanhoProduto tamanho_;
 
     public ProdutoPedido(){
@@ -18,8 +20,9 @@ public class ProdutoPedido extends EntidadeBasica {
 
     public ProdutoPedido(String pedido, Produto produto, TamanhoProduto tamanho){
         this.pedido_ = pedido;
-        this.produto_ = produto;
+        this.produto_o_ = produto;
         this.tamanho_ = tamanho;
+        this.produto = produto.getId();
     }
 
     public String getPedido() {
@@ -30,12 +33,21 @@ public class ProdutoPedido extends EntidadeBasica {
         this.pedido_ = pedido;
     }
 
-    public Produto getProduto() {
-        return produto_;
+    public String getProduto() {
+        return produto;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto_ = produto;
+    public void setProduto(String produto) {
+        this.produto = produto;
+    }
+
+    @Exclude
+    public Produto getProdutoO() {
+        return produto_o_;
+    }
+
+    public void setProdutoO(Produto produto) {
+        this.produto_o_ = produto;
     }
 
     public TamanhoProduto getTamanho() {

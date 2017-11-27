@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
+    android:padding="10dp"
+    android:orientation="horizontal">
     <TextView
         android:id="@+id/txt_nome_produto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="10dp"
         android:text="@string/produto"
-        android:textAlignment="center"
+        android:layout_weight="0.7"
         android:textSize="18sp"
         android:textStyle="bold" />
+
+    <ImageButton
+        android:id="@+id/adicionar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundLogin"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
 </LinearLayout>

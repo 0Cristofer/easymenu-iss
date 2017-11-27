@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/produto_pop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/produto"
+        android:textAlignment="center"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+    <TextView
+        android:id="@+id/preco_u"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Preço"
+        android:textAlignment="center" />
+
+    <EditText
+        android:id="@+id/quantidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Quantidade"
+        android:inputType="number" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ok" />
+
+        <Button
+            android:id="@+id/sair"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="X" />
+    </LinearLayout>
+
+</LinearLayout>

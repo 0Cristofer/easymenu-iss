@@ -2,6 +2,7 @@ package com.bccog.easymenu.gui.holders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.bccog.easymenu.R;
@@ -13,10 +14,12 @@ import com.bccog.easymenu.R;
 public class ProdutoHolder extends RecyclerView.ViewHolder {
 
     public TextView nome_produto;
+    public ImageButton adicionar;
 
     public ProdutoHolder(View itemView) {
         super(itemView);
 
         nome_produto = itemView.findViewById(R.id.txt_nome_produto);
+        adicionar = itemView.findViewById(R.id.adicionar);
     }
 }

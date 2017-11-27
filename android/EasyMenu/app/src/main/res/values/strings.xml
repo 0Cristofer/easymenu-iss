@@ -31,4 +31,5 @@
     <string name="title_activity_sel_est">Selecionar estabelecimento</string>
     <string name="title_activity_sel_produto">Selecionar Produto</string>
     <string name="produto">Produto</string>
+    <string name="title_activity_pedidos">Pedidos</string>
 </resources>

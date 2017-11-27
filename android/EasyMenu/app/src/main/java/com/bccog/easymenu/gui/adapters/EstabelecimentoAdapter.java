@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.bccog.easymenu.R;
 import com.bccog.easymenu.controladores.ControladorEstabelecimento;
+import com.bccog.easymenu.controladores.ControladorProduto;
 import com.bccog.easymenu.entidades.estabelecimento.Estabelecimento;
 import com.bccog.easymenu.gui.activities.SelProdutoActivity;
 import com.bccog.easymenu.gui.holders.EstabelecimentoHolder;
@@ -41,7 +42,17 @@ public class EstabelecimentoAdapter extends RecyclerView.Adapter<Estabelecimento
             @Override
             public void onClick(View view) {
                 ControladorEstabelecimento.setAtual(atual);
-                holder.itemView.getContext().startActivity(new Intent(holder.itemView.getContext(), SelProdutoActivity.class));
+                ControladorProduto.carregaProdutos(new ControladorProduto.ProdutoListener() {
+                    @Override
+                    public void onCarregado() {
+                        holder.itemView.getContext().startActivity(new Intent(holder.itemView.getContext(), SelProdutoActivity.class));
+                    }
+
+                    @Override
+                    public void onCancelado() {
+
+                    }
+                });
             }
         });
     }

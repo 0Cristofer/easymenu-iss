@@ -29,6 +29,9 @@
         <activity
             android:name=".gui.activities.SelProdutoActivity"
             android:label="@string/title_activity_sel_produto" />
+        <activity
+            android:name=".gui.activities.PedidosActivity"
+            android:label="@string/title_activity_pedidos" />
     </application>
 
 </manifest>

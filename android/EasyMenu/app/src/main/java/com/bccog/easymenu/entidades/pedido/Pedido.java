@@ -140,6 +140,10 @@ public class Pedido extends EntidadeBasica {
         this.produtos_no_pedido_ = produtos_no_pedido;
     }
 
+    public void adicionarProdutoPedido(ProdutoPedido p){
+        produtos_no_pedido_.add(p);
+    }
+
     @Exclude
     public Estabelecimento getEstabelecimento() {
         return estabelecimento_;
@@ -153,19 +157,19 @@ public class Pedido extends EntidadeBasica {
         for(ProdutoPedido p : produtos_no_pedido_){
             switch (p.getTamanho()){
                 case UNICO:
-                    valor_ = valor_ + ((ProdutoPrecoUnico)p.getProduto()).getPreco();
+                    valor_ = valor_ + ((ProdutoPrecoUnico)p.getProdutoO()).getPreco();
                     break;
 
                 case PEQUENO:
-                    valor_ = valor_ + ((ProdutoComTamanho)p.getProduto()).getPrecoP();
+                    valor_ = valor_ + ((ProdutoComTamanho)p.getProdutoO()).getPrecoP();
                     break;
 
                 case MEDIO:
-                    valor_ = valor_ + ((ProdutoComTamanho)p.getProduto()).getPrecoM();
+                    valor_ = valor_ + ((ProdutoComTamanho)p.getProdutoO()).getPrecoM();
                     break;
 
                 case GRANDE:
-                    valor_ = valor_ + ((ProdutoComTamanho)p.getProduto()).getPrecoG();
+                    valor_ = valor_ + ((ProdutoComTamanho)p.getProdutoO()).getPrecoG();
                     break;
             }
         }
