@@ -41,7 +41,7 @@ public class SelecionaCardapioController implements BaseController {
 
     @FXML
     public void iniciarSessao() {
-        controller_.setVisibleScreen("work_screen");
+        controller_.setVisibleScreen("sessao_trabalho");
     }
 
     @FXML public void verCategorias(){

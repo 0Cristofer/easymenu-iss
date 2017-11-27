@@ -117,15 +117,6 @@ public class HistoricoController implements BaseController {
     public void display(PedidoView pv){
         Pedido p = pv.getPedido_();
 
-        /**
-         *   public Label lbl_id;
-         public Label lbl_data_recebido;
-         public Label lbl_cliente_nome;
-         public Label lbl_finalizado;
-         public Label lbl_valor;
-         public TextArea txtA_desc;
-         */
-
         lbl_id.setText("Pedido: " + p.getId());
         lbl_cliente_nome.setText("Cliente: " + p.getCliente().getNome());
         lbl_valor.setText("Valor total R$ " + Float.toString(p.getValor()));
