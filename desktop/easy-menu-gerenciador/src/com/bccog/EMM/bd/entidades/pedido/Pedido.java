@@ -220,6 +220,32 @@ public class Pedido extends EntidadeBasica {
             return retorno;
         }
 
+    public String produtosToString(){
+        String retorno= "";
+
+        for(ProdutoPedido p : produtos_no_pedido_) {
+            if (p.getTamanho() == ProdutoPedido.TamanhoProduto.UNICO) {
+                ProdutoPrecoUnico pd = ((ProdutoPrecoUnico) p.getProduto());
+                retorno = retorno + pd.getNome() + " : " + pd.getPreco();
+            } else {
+                ProdutoComTamanho pd = ((ProdutoComTamanho) p.getProduto());
+                switch (p.getTamanho()) {
+                    case PEQUENO:
+                        retorno = retorno + pd.getNome() + " : " + pd.getPrecoP();
+                        break;
+                    case MEDIO:
+                        retorno = retorno + pd.getNome() + " : " + pd.getPrecoM();
+                        break;
+                    case GRANDE:
+                        retorno = retorno + pd.getNome() + " : " + pd.getPrecoG();
+                        break;
+                }
+            }
+        }
+
+        return retorno;
+    }
+
         @Override
         public boolean equals(Object obj) {
             return (obj instanceof Pedido) && super.equals(obj);

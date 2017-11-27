@@ -1,8 +1,8 @@
 package com.bccog.EMM.gui.controladores;
 
+import com.bccog.EMM.EMM;
 import com.bccog.EMM.bd.entidades.pedido.Pedido;
 import com.bccog.EMM.gui.subEntidades.PedidoView;
-import com.bccog.EMM.gui.subEntidades.ProdutoView;
 import com.bccog.FXController.BaseController;
 import com.bccog.FXController.ScreenController;
 import com.jfoenix.controls.*;
@@ -11,10 +11,12 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TreeItem;
 import javafx.scene.layout.BorderPane;
+import org.joda.time.DateTime;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,9 +32,12 @@ public class HistoricoController implements BaseController {
     public BorderPane main_pane_;
     public JFXButton btn_produtos_;
     public JFXTreeTableView<PedidoView> pedidos_view_;
-    public JFXTextField txtf_busca_;
-    public JFXButton btn_add_categoria_;
-    public JFXButton btn_del_prod_;
+    public Label lbl_id;
+    public Label lbl_data_recebido;
+    public Label lbl_cliente_nome;
+    public Label lbl_finalizado;
+    public Label lbl_valor;
+    public TextArea txtA_desc;
 
     public void dadosEstabelecimento(){ controller_.setVisibleScreen("info_estabelecimento");}
 
@@ -62,9 +67,9 @@ public class HistoricoController implements BaseController {
     @Override
     public void atualizar() {
 
-        JFXTreeTableColumn<PedidoView, String> idCol = new JFXTreeTableColumn<>("ID");
-        idCol.setPrefWidth(50);
-        idCol.setCellValueFactory(param -> param.getValue().getValue().id_Property());
+        JFXTreeTableColumn<PedidoView, String> idCol = new JFXTreeTableColumn<>("Data");
+        idCol.setPrefWidth(150);
+        idCol.setCellValueFactory(param -> param.getValue().getValue().data_Property());
 
         JFXTreeTableColumn<PedidoView, String> horarioCol = new JFXTreeTableColumn<>("H. Recebido");
         horarioCol.setPrefWidth(150);
@@ -75,7 +80,7 @@ public class HistoricoController implements BaseController {
         horarioFCol.setCellValueFactory(param -> param.getValue().getValue().horario_finalizado_Property());
 
         JFXTreeTableColumn<PedidoView, String> nomeCol = new JFXTreeTableColumn<>("Cliente");
-        nomeCol.setPrefWidth(300);
+        nomeCol.setPrefWidth(250);
         nomeCol.setCellValueFactory(param -> param.getValue().getValue().cliente_nome_Property());
 
         JFXTreeTableColumn<PedidoView, String> valorCol = new JFXTreeTableColumn<>("Valor");
@@ -83,10 +88,9 @@ public class HistoricoController implements BaseController {
         valorCol.setCellValueFactory(param -> param.getValue().getValue().valor_Property());
 
 
-        //List<Pedido> pedidos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getPedidos(); //todo
-        List<Pedido> pedidos = new ArrayList<>();
+        List<Pedido> pedidos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getPedidos();
         ObservableList<PedidoView> pedidosv = FXCollections.observableArrayList();
-
+        System.out.println(pedidos.size());
         for (Pedido p : pedidos) {
             pedidosv.add(new PedidoView(p));
         }
@@ -107,16 +111,33 @@ public class HistoricoController implements BaseController {
                     selected_pedido_ = null;
                 }
         });
-
-        /*txtf_busca_.textProperty().addListener((observable, oldValue, newValue) -> pedidos_view_
-                .setPredicate(produtoViewTreeItem -> produtoViewTreeItem.getValue().nomeProperty()
-                        .getValue().contains(newValue)));*/
     }
 
 
     public void display(PedidoView pv){
         Pedido p = pv.getPedido_();
 
+        /**
+         *   public Label lbl_id;
+         public Label lbl_data_recebido;
+         public Label lbl_cliente_nome;
+         public Label lbl_finalizado;
+         public Label lbl_valor;
+         public TextArea txtA_desc;
+         */
+
+        lbl_id.setText("Pedido: " + p.getId());
+        lbl_cliente_nome.setText("Cliente: " + p.getCliente().getNome());
+        lbl_valor.setText("Valor total R$ " + Float.toString(p.getValor()));
+        lbl_finalizado.setText("Finalizado as " + pv.getDt_finalizado().getHourOfDay() + ":" + pv.getDt_finalizado().getMinuteOfHour());
+
+        lbl_data_recebido.setText(pv.getDt_recebido().getDayOfMonth() + "/" +
+                                  pv.getDt_recebido().getMonthOfYear() + "/" +
+                                  pv.getDt_recebido().getYear() + " as " +
+                                  pv.getDt_recebido().getHourOfDay() + ":" +
+                                  pv.getDt_recebido().getMinuteOfHour());
+
+        txtA_desc.setText(p.produtosToString());
     }
 
     @Override

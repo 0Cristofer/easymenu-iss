@@ -12,11 +12,13 @@ import org.joda.time.DateTime;
  * @since 21/11/17
  */
 public class PedidoView extends RecursiveTreeObject<PedidoView> {
-    private StringProperty id_;
+    private StringProperty data_;
     private StringProperty cliente_nome_;
     private StringProperty valor_;
     private StringProperty horario_recebido_;
     private StringProperty horario_finalizado_;
+    DateTime dt_recebido;
+    DateTime dt_finalizado;
 
     private Pedido pedido_;
 
@@ -24,19 +26,27 @@ public class PedidoView extends RecursiveTreeObject<PedidoView> {
     public PedidoView(Pedido pedido) {
         pedido_ = pedido;
 
-        id_ = new SimpleStringProperty(pedido_.getId());
+        dt_recebido = new DateTime(pedido_.getTimestamp());
+        dt_finalizado = new DateTime(pedido_.getTimestamp_final_());
+
+        data_ = new SimpleStringProperty( Integer.toString(dt_recebido.getDayOfMonth()) + "/" + Integer.toString(dt_recebido.getMonthOfYear()));
 
         cliente_nome_ = new SimpleStringProperty(pedido_.getCliente().getNome());
 
         valor_ = new SimpleStringProperty(Float.toString(pedido_.getValor()));
 
-        DateTime time_recebido = new DateTime(pedido_.getTimestamp());
-        DateTime time_finalizado = new DateTime(pedido_.getTimestamp_final_());
-
-        horario_recebido_ = new SimpleStringProperty(time_recebido.toString());
-        horario_finalizado_ = new SimpleStringProperty(time_finalizado.toString());
+        horario_recebido_ = new SimpleStringProperty(Integer.toString(dt_recebido.getHourOfDay()) + ":" + Integer.toString(dt_recebido.getMinuteOfHour()));
+        horario_finalizado_ = new SimpleStringProperty(Integer.toString(dt_finalizado.getHourOfDay()) + ":" + Integer.toString(dt_finalizado.getMinuteOfHour()));
     }
 
+
+    public DateTime getDt_recebido() {
+        return dt_recebido;
+    }
+
+    public DateTime getDt_finalizado() {
+        return dt_finalizado;
+    }
 
     public Pedido getPedido_() {
         return pedido_;
@@ -47,12 +57,12 @@ public class PedidoView extends RecursiveTreeObject<PedidoView> {
     }
 
 
-    public String getId_() {
-        return id_.get();
+    public String getData_() {
+        return data_.get();
     }
 
-    public StringProperty id_Property() {
-        return id_;
+    public StringProperty data_Property() {
+        return data_;
     }
 
     public String getCliente_nome_() {
