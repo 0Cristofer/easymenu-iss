@@ -12,6 +12,8 @@ public class ProdutoPedido extends EntidadeBasica {
     @SerializedName("pedido")
     private String pedido_;
     private transient Produto produto_;
+    @SerializedName("produto")
+    private String produto_id_;
     @SerializedName("tamanho")
     private TamanhoProduto tamanho_;
 
@@ -39,6 +41,14 @@ public class ProdutoPedido extends EntidadeBasica {
 
     public void setProduto(Produto produto) {
         this.produto_ = produto;
+    }
+
+    public String getProdutoId() {
+        return produto_id_;
+    }
+
+    public void setProdutoId(String produto_id_) {
+        this.produto_id_ = produto_id_;
     }
 
     public TamanhoProduto getTamanho() {

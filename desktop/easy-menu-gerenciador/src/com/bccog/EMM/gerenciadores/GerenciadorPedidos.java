@@ -99,13 +99,10 @@ public class GerenciadorPedidos {
 
                 for (ProdutoPedido p : ProdutosNoPedido) {
                     if (p.getTamanho() == ProdutoPedido.TamanhoProduto.UNICO) {
-                        p.setProduto(gson.fromJson(element.getAsJsonObject().
-                                get("produtosNoPedido").getAsJsonArray().get(i).
-                                getAsJsonObject().get("produto").toString(), ProdutoPrecoUnico.class));
+                        p.setProduto(GerenciadorProdutos.getProdutoUnico(p.getProdutoId()));
                     } else {
-                        p.setProduto(gson.fromJson(element.getAsJsonObject().
-                                get("produtosNoPedido").getAsJsonArray().get(i).
-                                getAsJsonObject().get("produto").toString(), ProdutoComTamanho.class));
+                        p.setProduto(GerenciadorProdutos.getProdutoTamanho(p.getProdutoId()));
+
                     }
                     i = i + 1;
                 }
