@@ -47,7 +47,6 @@ public class ProdutoView extends RecursiveTreeObject<ProdutoView> {
 
         this.tags_text_ = new SimpleStringProperty(tags);
         this.categorias_ = new SimpleStringProperty(categorias);
-        System.out.println(produto_.getDescricao());
         this.descricao_  = new SimpleStringProperty(produto_.getDescricao());
 
         if(produto_ instanceof ProdutoComTamanho){

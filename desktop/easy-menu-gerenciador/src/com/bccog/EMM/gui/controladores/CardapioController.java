@@ -184,9 +184,9 @@ public class CardapioController implements BaseController {
             precoCol.setPrefWidth(250);
             precoCol.setCellValueFactory(param -> param.getValue().getValue().precoProperty());
 
-            JFXTreeTableColumn<ProdutoView, String> tagsCol = new JFXTreeTableColumn<>("Tags");
-            tagsCol.setPrefWidth(200);
-            tagsCol.setCellValueFactory(param -> param.getValue().getValue().descricao_Property());
+            JFXTreeTableColumn<ProdutoView, String> descCol = new JFXTreeTableColumn<>("Descriçao");
+            descCol.setPrefWidth(500);
+            descCol.setCellValueFactory(param -> param.getValue().getValue().descricao_Property());
 
             ObservableList<ProdutoView> produtosv = FXCollections.observableArrayList();
 
@@ -197,7 +197,7 @@ public class CardapioController implements BaseController {
             }
 
             final TreeItem<ProdutoView> root = new RecursiveTreeItem<>(produtosv, RecursiveTreeObject::getChildren);
-            produto_view_.getColumns().setAll(nomeCol, precoCol, tagsCol);
+            produto_view_.getColumns().setAll(nomeCol, precoCol, descCol);
             produto_view_.setRoot(root);
             produto_view_.setShowRoot(false);
 
