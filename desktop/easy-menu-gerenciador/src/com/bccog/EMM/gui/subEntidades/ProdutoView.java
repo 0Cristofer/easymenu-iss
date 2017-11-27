@@ -1,5 +1,7 @@
 package com.bccog.EMM.gui.subEntidades;
 
+import com.bccog.EMM.EMM;
+import com.bccog.EMM.bd.entidades.categoria.Categoria;
 import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.entidades.produto.ProdutoComTamanho;
 import com.bccog.EMM.bd.entidades.produto.ProdutoPrecoUnico;
@@ -16,7 +18,7 @@ public class ProdutoView extends RecursiveTreeObject<ProdutoView> {
     private StringProperty nome_;
     private StringProperty preco_;
     private StringProperty tags_text_;
-    private StringProperty cardapio_;
+    private StringProperty categorias_;
 
     private Produto produto_;
 
@@ -27,7 +29,7 @@ public class ProdutoView extends RecursiveTreeObject<ProdutoView> {
         this.nome_ = new SimpleStringProperty(produto_.getNome());
 
         String tags = "";
-        String cardapios = "";
+        String categorias = "";
 
         if(produto.getTags() != null){
             for (Tag t : produto_.getTags()) {
@@ -35,9 +37,16 @@ public class ProdutoView extends RecursiveTreeObject<ProdutoView> {
             }
         }
 
-        this.tags_text_ = new SimpleStringProperty(tags);
+        for (Categoria c: EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCategorias()) {
+            if (c.getProdutos().contains(produto_)){
+                categorias = categorias + c.getNome() + " ";
+            }
+        }
 
-        this.cardapio_ = new SimpleStringProperty(cardapios);
+
+        this.tags_text_ = new SimpleStringProperty(tags);
+        this.categorias_ = new SimpleStringProperty(categorias);
+
 
         if(produto_ instanceof ProdutoComTamanho){
             String precos = ("P: " + ((ProdutoComTamanho) produto).getPrecoP() + "$ | " +
@@ -77,6 +86,6 @@ public class ProdutoView extends RecursiveTreeObject<ProdutoView> {
 
 
     public StringProperty cardapioProperty() {
-        return cardapio_;
+        return categorias_;
     }
 }
