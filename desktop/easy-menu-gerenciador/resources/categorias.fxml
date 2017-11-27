@@ -2,19 +2,23 @@
 
 <!-- Autores: Guilherme Quental -->
 
-<?import java.lang.*?>
-<?import javafx.collections.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import com.jfoenix.controls.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.collections.FXCollections?>
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="main_pane_" maxHeight="1080.0" maxWidth="1920.0" minHeight="405.0" minWidth="720.0" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bccog.EMM.gui.controladores.CategoriaController">
+<BorderPane fx:id="main_pane_" maxHeight="1080.0" maxWidth="1920.0" minHeight="405.0" minWidth="720.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.bccog.EMM.gui.controladores.CategoriaController">
     <right>
         <VBox maxWidth="284.0" minWidth="144.0" prefWidth="192.0" BorderPane.alignment="CENTER">
             <children>
@@ -68,7 +72,7 @@
                         </ImageView>
                     </graphic>
                 </JFXButton>
-                <JFXButton fx:id="btn_configuracoes_" contentDisplay="TOP" layoutX="10.0" layoutY="85.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Configurações" textFill="WHITE">
+                <JFXButton fx:id="btn_configuracoes_" contentDisplay="TOP" layoutX="10.0" layoutY="85.0" maxHeight="1080.0" maxWidth="284.0" minWidth="144.0" onAction="#historico" prefHeight="540.0" prefWidth="192.0" ripplerFill="WHITE" styleClass="btn_lateral_" stylesheets="@stylesheet.css" text="Historico" textFill="WHITE">
                     <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -81,8 +85,8 @@
             </children>
         </VBox>
     </right>
-   <left>
-        <GridPane style="-fx-background-color: #e0e0e0;" BorderPane.alignment="CENTER">
+   <center>
+        <GridPane alignment="CENTER" style="-fx-background-color: #e0e0e0;" BorderPane.alignment="CENTER">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="18.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" />
@@ -96,6 +100,20 @@
                 <RowConstraints percentHeight="70.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
+                <VBox alignment="CENTER" stylesheets="@stylesheet.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                    <children>
+                        <JFXButton fx:id="btn_new_categoria_" alignment="CENTER" contentDisplay="CENTER" onAction="#criarCategoria" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" text="Criar Categoria" VBox.vgrow="ALWAYS" />
+                        <JFXButton fx:id="btn_del_categoria_" layoutX="10.0" layoutY="10.0" onAction="#deletarCategoria" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" text="Deletar Categoria" />
+                        <JFXButton fx:id="btn_del_produto_" onAction="#removeProduto" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" text="Remover Produto" />
+                        <JFXButton id="btn_cardapio_voltar_" fx:id="btn_voltar_" onAction="#voltainicio" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" stylesheets="@stylesheet.css" text="Voltar" />
+                    </children>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin>
+                </VBox>
                 <JFXComboBox fx:id="cbox_categoria_" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#selecionaCategoria" promptText="Selecione a Categoria" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets bottom="15.0" right="30.0" />
@@ -118,25 +136,11 @@
                         <Insets left="10.0" />
                     </padding>
                 </Label>
-                <JFXTreeTableView fx:id="produto_view_" styleClass="card" stylesheets="@stylesheet.css" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="3" GridPane.rowSpan="2147483647">
+                <JFXTreeTableView fx:id="produto_view_" styleClass="card" stylesheets="@stylesheet.css" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                     <GridPane.margin>
                         <Insets bottom="5.0" right="5.0" />
                     </GridPane.margin>
                 </JFXTreeTableView>
-                <VBox fillWidth="false" stylesheets="@stylesheet.css" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER">
-                    <children>
-                        <JFXButton fx:id="btn_new_categoria_" onAction="#criarCategoria" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" text="Criar Categoria" />
-                        <JFXButton fx:id="btn_del_categoria_" onAction="#deletarCategoria" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" text="Deletar Categoria" />
-                        <JFXButton fx:id="btn_del_produto_" onAction="#removeProduto" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" text="Remover Produto" />
-                        <JFXButton id="btn_cardapio_voltar_" fx:id="btn_voltar_" onAction="#voltainicio" prefHeight="200.0" prefWidth="200.0" styleClass="btn_cardapio_" stylesheets="@stylesheet.css" text="Voltar" />
-                    </children>
-                    <opaqueInsets>
-                        <Insets />
-                    </opaqueInsets>
-                    <GridPane.margin>
-                        <Insets />
-                    </GridPane.margin>
-                </VBox>
                 <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
@@ -162,5 +166,5 @@
                 </GridPane>
             </children>
         </GridPane>
-   </left>
+   </center>
 </BorderPane>

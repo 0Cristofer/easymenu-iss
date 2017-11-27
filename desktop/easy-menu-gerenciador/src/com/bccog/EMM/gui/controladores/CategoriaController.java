@@ -54,6 +54,9 @@ public class CategoriaController implements BaseController{
     @FXML public void voltainicio(){
         controller_.setVisibleScreen("main");
     }
+    public void historico() {
+        controller_.setVisibleScreen("historico");
+    }
     @FXML public void sair(){
         Platform.exit();
     }
@@ -138,7 +141,7 @@ public class CategoriaController implements BaseController{
         precoCol.setCellValueFactory(param -> param.getValue().getValue().precoProperty());
 
         JFXTreeTableColumn<ProdutoView, String> tagsCol = new JFXTreeTableColumn<>("Descriçao");
-        tagsCol.setPrefWidth(200);
+        tagsCol.setPrefWidth(600);
         tagsCol.setCellValueFactory(param -> param.getValue().getValue().descricao_Property());
 
 
