@@ -63,7 +63,7 @@ public class ProdutoPedido extends EntidadeBasica {
         UNICO("unico"),
         PEQUENO("pequeno"),
         MEDIO("medio"),
-        GRANDE("grade");
+        GRANDE("grande");
 
         @SerializedName("tamanho")
         private String tamanho_;
