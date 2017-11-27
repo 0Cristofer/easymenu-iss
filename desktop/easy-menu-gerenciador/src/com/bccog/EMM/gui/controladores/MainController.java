@@ -108,42 +108,38 @@ public class MainController implements BaseController {
                         produtoMap.put(pp.getProduto(), novoValor);
                     }
 
-                    if (categoriaMap.get(pp.getProduto()) == null) {
-                        if (maiorC == 0) {
-                            maiorC = 1;
-                            for (Categoria cat : EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCategorias()) {
-                                if (cat.getProdutos().contains(pp.getProduto())) {
-                                    categoriaMap.put(cat, maiorC);
-                                    maiorCategoria = cat;
+                    for (Categoria categoria : EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCategorias()) {
+                        if (categoria.getProdutos().contains(pp.getProduto())) {
+                            if (categoriaMap.get(categoria) == null) {
+                                if (maiorC == 0) {
+                                    maiorC = 1;
+                                    maiorCategoria = categoria;
                                 }
-                            }
-                        }
-                    } else {
-                        Categoria aux = null;
-                        for (Categoria cat : EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCategorias()) {
-                            if (cat.getProdutos().contains(pp.getProduto())) {
-                                categoriaMap.put(cat, maiorC);
-                                aux = cat;
-                            }
-                        }
-                        int novoValor = categoriaMap.get(aux);
-                        if (novoValor > maiorC) {
-                            maiorC = novoValor;
-                            maiorCategoria = aux;
-                        }
-                        categoriaMap.put(aux, novoValor);
+                                categoriaMap.put(categoria, 1);
+                            } else {
+                                int novoValor = categoriaMap.get(categoria) + 1;
+                                if (novoValor > maiorC) {
+                                    maiorC = novoValor;
+                                    maiorCategoria = categoria;
+                                }
+                                categoriaMap.put(categoria, novoValor);
 
+                            }
+                        }
                     }
+
+
                 }
             }
-            if (maiorCategoria !=null){
-                lbl_categoria_vend.setText(maiorCategoria.getNome());
-            } else System.out.println("CAT NULL");
-            if(maiorProduto != null){
-                lbl_produto_vend.setText(maiorProduto.getNome());
-            }else System.out.println("PROD NULL");
+            lbl_categoria_vend.setText(maiorCategoria.getNome());
+            lbl_produto_vend.setText(maiorProduto.getNome());
             lbl_lucro.setText(String.valueOf("R$ " + lucro));
             lbl_total_produtos.setText(String.valueOf(totalProdutosVendidos + " produtos"));
+        } else {
+            lbl_categoria_vend.setText("Nao ha pedidos!");
+            lbl_produto_vend.setText("Nao ha pedidos!");
+            lbl_lucro.setText("Nao ha pedidos!");
+            lbl_total_produtos.setText("Nao ha pedidos!");
         }
     }
 
