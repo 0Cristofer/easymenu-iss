@@ -98,11 +98,10 @@ public class GerenciadorPedidos {
             if(ProdutosNoPedido != null) {
 
                 for (ProdutoPedido p : ProdutosNoPedido) {
-                    if (p.getTamanho() == ProdutoPedido.TamanhoProduto.UNICO) {
-                        p.setProduto(GerenciadorProdutos.getProdutoUnico(p.getProdutoId()));
-                    } else {
-                        p.setProduto(GerenciadorProdutos.getProdutoTamanho(p.getProdutoId()));
-
+                    for(Produto pp : GerenciadorEstabelecimentos.getEstabelecimento().getProdutos()){
+                        if(pp.equals(p.getProduto())){
+                            p.setProduto(pp);
+                        }
                     }
                     i = i + 1;
                 }
