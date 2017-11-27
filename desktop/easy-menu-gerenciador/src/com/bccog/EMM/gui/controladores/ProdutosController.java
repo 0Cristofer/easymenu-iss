@@ -134,13 +134,13 @@ public class ProdutosController implements BaseController {
         precoCol.setPrefWidth(250);
         precoCol.setCellValueFactory(param -> param.getValue().getValue().precoProperty());
 
-        /*JFXTreeTableColumn<ProdutoView, String> tagsCol = new JFXTreeTableColumn<>("Tags");
-        tagsCol.setPrefWidth(200);
-        tagsCol.setCellValueFactory(param -> param.getValue().getValue().tagsTextProperty());*/
-
         JFXTreeTableColumn<ProdutoView, String> categoriaCol = new JFXTreeTableColumn<>("Categorias");
         categoriaCol.setPrefWidth(300);
         categoriaCol.setCellValueFactory(param -> param.getValue().getValue().cardapioProperty());
+
+        JFXTreeTableColumn<ProdutoView, String> descCol = new JFXTreeTableColumn<>("Descriçao");
+        descCol.setPrefWidth(600);
+        descCol.setCellValueFactory(param -> param.getValue().getValue().descricao_Property());
 
         List<Produto> produtos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getProdutos();
         ObservableList<ProdutoView> produtosv = FXCollections.observableArrayList();
@@ -150,7 +150,7 @@ public class ProdutosController implements BaseController {
         }
 
         final TreeItem<ProdutoView> root = new RecursiveTreeItem<>(produtosv, RecursiveTreeObject::getChildren);
-        produto_view_.getColumns().setAll(nomeCol, precoCol, categoriaCol);
+        produto_view_.getColumns().setAll(nomeCol, precoCol, categoriaCol, descCol);
         produto_view_.setRoot(root);
         produto_view_.setShowRoot(false);
 

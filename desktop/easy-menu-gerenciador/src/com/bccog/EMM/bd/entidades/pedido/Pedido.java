@@ -226,7 +226,7 @@ public class Pedido extends EntidadeBasica {
         for(ProdutoPedido p : produtos_no_pedido_) {
             if (p.getTamanho() == ProdutoPedido.TamanhoProduto.UNICO) {
                 ProdutoPrecoUnico pd = ((ProdutoPrecoUnico) p.getProduto());
-                retorno = retorno + pd.getNome() + " : " + pd.getPreco();
+                retorno = retorno + pd.getNome() + " : " + pd.getPreco() + "\n";
             } else {
                 ProdutoComTamanho pd = ((ProdutoComTamanho) p.getProduto());
                 switch (p.getTamanho()) {
@@ -240,6 +240,7 @@ public class Pedido extends EntidadeBasica {
                         retorno = retorno + pd.getNome() + " : " + pd.getPrecoG();
                         break;
                 }
+                retorno = retorno + "\n";
             }
         }
 

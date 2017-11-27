@@ -186,7 +186,7 @@ public class CardapioController implements BaseController {
 
             JFXTreeTableColumn<ProdutoView, String> tagsCol = new JFXTreeTableColumn<>("Tags");
             tagsCol.setPrefWidth(200);
-            tagsCol.setCellValueFactory(param -> param.getValue().getValue().tagsTextProperty());
+            tagsCol.setCellValueFactory(param -> param.getValue().getValue().descricao_Property());
 
             ObservableList<ProdutoView> produtosv = FXCollections.observableArrayList();
 

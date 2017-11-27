@@ -137,9 +137,9 @@ public class CategoriaController implements BaseController{
         precoCol.setPrefWidth(250);
         precoCol.setCellValueFactory(param -> param.getValue().getValue().precoProperty());
 
-        JFXTreeTableColumn<ProdutoView, String> tagsCol = new JFXTreeTableColumn<>("Tags");
+        JFXTreeTableColumn<ProdutoView, String> tagsCol = new JFXTreeTableColumn<>("Descriçao");
         tagsCol.setPrefWidth(200);
-        tagsCol.setCellValueFactory(param -> param.getValue().getValue().tagsTextProperty());
+        tagsCol.setCellValueFactory(param -> param.getValue().getValue().descricao_Property());
 
 
         final TreeItem<ProdutoView> root = new RecursiveTreeItem<>(produtoViews, RecursiveTreeObject::getChildren);

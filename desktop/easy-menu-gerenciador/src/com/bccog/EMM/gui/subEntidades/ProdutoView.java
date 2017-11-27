@@ -19,6 +19,7 @@ public class ProdutoView extends RecursiveTreeObject<ProdutoView> {
     private StringProperty preco_;
     private StringProperty tags_text_;
     private StringProperty categorias_;
+    private StringProperty descricao_;
 
     private Produto produto_;
 
@@ -46,7 +47,8 @@ public class ProdutoView extends RecursiveTreeObject<ProdutoView> {
 
         this.tags_text_ = new SimpleStringProperty(tags);
         this.categorias_ = new SimpleStringProperty(categorias);
-
+        System.out.println(produto_.getDescricao());
+        this.descricao_  = new SimpleStringProperty(produto_.getDescricao());
 
         if(produto_ instanceof ProdutoComTamanho){
             String precos = ("P: " + ((ProdutoComTamanho) produto).getPrecoP() + "$ | " +
@@ -79,11 +81,13 @@ public class ProdutoView extends RecursiveTreeObject<ProdutoView> {
         return preco_;
     }
 
-
-    public StringProperty tagsTextProperty() {
-        return tags_text_;
+    public String getDescricao_() {
+        return descricao_.get();
     }
 
+    public StringProperty descricao_Property() {
+        return descricao_;
+    }
 
     public StringProperty cardapioProperty() {
         return categorias_;
