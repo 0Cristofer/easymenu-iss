@@ -136,8 +136,10 @@ public class MainController implements BaseController {
                 }
             }
 
-            lbl_categoria_vend.setText(maiorCategoria.getNome());
-            lbl_produto_vend.setText(maiorProduto.getNome());
+            if(maiorCategoria != null && maiorProduto != null) {
+                lbl_categoria_vend.setText(maiorCategoria.getNome());
+                lbl_produto_vend.setText(maiorProduto.getNome());
+            }
             lbl_lucro.setText(String.valueOf("R$ " + lucro));
             lbl_total_produtos.setText(String.valueOf(totalProdutosVendidos + " produtos"));
         }
