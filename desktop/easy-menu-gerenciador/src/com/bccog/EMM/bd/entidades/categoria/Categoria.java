@@ -79,6 +79,6 @@ public class Categoria extends EntidadeBasica{
 
     @Override
     public boolean equals(Object obj) {
-        return (obj instanceof Categoria) && super.equals(obj);
+        return (obj instanceof Categoria) && (this.getId().equals(((Categoria) obj).getId()));
     }
 }

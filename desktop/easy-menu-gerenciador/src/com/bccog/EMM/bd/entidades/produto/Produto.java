@@ -60,6 +60,6 @@ public abstract class Produto extends EntidadeBasica {
 
     @Override
     public boolean equals(Object obj) {
-        return (obj instanceof Produto) && super.equals(obj);
+        return (obj instanceof Produto) && (this.getId().equals(((Produto) obj).getId()));
     }
 }
