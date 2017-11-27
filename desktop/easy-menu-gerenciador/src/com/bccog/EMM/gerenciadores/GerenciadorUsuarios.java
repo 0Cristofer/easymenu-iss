@@ -112,9 +112,13 @@ public class GerenciadorUsuarios {
     private static void carregaDados(Usuario usuario) throws NoConnectionException, ForbiddenException,
             BadRequestException, NotImplementedErrorExcpetion, InternalServerErrorException,
             NotFoundException, NotAuthorizedException {
+        System.out.println("carregando...");
         List<Cardapio> cardapios = GerenciadorCardapios.getCardapios();
+        System.out.println("carregado cardapios");
         List<Categoria> categorias = GerenciadorCategoria.getCategorias();
+        System.out.println("carregado categorias");
         List<Produto> produtos = GerenciadorProdutos.getProdutos();
+        System.out.println("carregado produtos");
 
         HashMap<String, Categoria> categoria_hash = new HashMap<>();
         HashMap<String, Produto> produto_hash = new HashMap<>();
@@ -142,6 +146,8 @@ public class GerenciadorUsuarios {
         usuario.getEstabelecimento().setCardapios(cardapios);
         usuario.getEstabelecimento().setCategorias(categorias);
         usuario.getEstabelecimento().setProdutos(produtos);
+        System.out.println("carregando pedidos");
         usuario.getEstabelecimento().setPedidos(GerenciadorPedidos.getPedidos());
+        System.out.println("carregado pedidos");
     }
 }
