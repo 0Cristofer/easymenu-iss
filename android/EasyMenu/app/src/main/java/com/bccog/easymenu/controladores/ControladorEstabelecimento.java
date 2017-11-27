@@ -29,6 +29,7 @@ public class ControladorEstabelecimento {
                 for(DataSnapshot d : dataSnapshot.getChildren()){
                     estabelecimentos_.add(d.getValue(EstabelecimentoMesa.class));
                     estabelecimentos_.get(i).setId(d.getKey());
+                    i = i + 1;
                 }
                 listener.onCarregado();
             }

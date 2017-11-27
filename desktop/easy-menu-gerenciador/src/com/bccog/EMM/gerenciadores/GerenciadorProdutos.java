@@ -53,6 +53,13 @@ public class GerenciadorProdutos {
         return keys;
     }
 
+    static ProdutoComTamanho getProdutoTamanho(String key){
+        return gerenciador_pt.getByKey(key);
+    }
+
+    static ProdutoPrecoUnico getProdutoUnico(String key){
+        return gerenciador_pu.getByKey(key);
+    }
 
     /**
      * Cadastra um ProdutoPrecoUnico, que tem apenas um único preço
