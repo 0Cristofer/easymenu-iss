@@ -1,6 +1,7 @@
 package com.bccog.EMM.gui.controladores;
 
 import com.bccog.EMM.EMM;
+import com.bccog.EMM.bd.entidades.categoria.Categoria;
 import com.bccog.EMM.bd.entidades.pedido.Pedido;
 import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.entidades.produto.ProdutoPedido;
@@ -14,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -39,25 +41,33 @@ public class MainController implements BaseController {
     int total_Categorias;
     int total_Produtos;
     private float lucro;
-    private int totalProdutos;
-    private int categoriaVendida;
-    private int produtoVendido;
+    private int totalProdutosVendidos;
 
-    public void produtos(){
+    public void produtos() {
         controller_.setVisibleScreen("produtos");
     }
 
-    public void cardapios(){ controller_.setVisibleScreen("seleciona_cardapio");}
+    public void cardapios() {
+        controller_.setVisibleScreen("seleciona_cardapio");
+    }
 
-    public void dadosEstabelecimento(){ controller_.setVisibleScreen("info_estabelecimento");}
+    public void dadosEstabelecimento() {
+        controller_.setVisibleScreen("info_estabelecimento");
+    }
 
-    public void categorias(){ controller_.setVisibleScreen("categorias");}
+    public void categorias() {
+        controller_.setVisibleScreen("categorias");
+    }
 
-    public void historico(){ controller_.setVisibleScreen("historico");}
+    public void historico() {
+        controller_.setVisibleScreen("historico");
+    }
 
-    public void gerenciador_cupons(){ controller_.setVisibleScreen("cupons"); }
+    public void gerenciador_cupons() {
+        controller_.setVisibleScreen("cupons");
+    }
 
-    public void sair(){
+    public void sair() {
         Platform.exit();
     }
 
@@ -66,18 +76,69 @@ public class MainController implements BaseController {
         pedidos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getPedidos();
 
         lbl_bemvindo_.setText("Bem vindo, " + EMM.getInstance().getUsuarioAtual().getEstabelecimento().getNome());
-
         total_Categorias = EMM.getInstance().getUsuarioAtual().getEstabelecimento().numeroCategorias();
         total_Produtos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().numeroProdutos();
-//        lucro = 0;
-//        total_Produtos = 0;
-//
-//        for (Pedido p: pedidos){
-//            lucro += p.getValor();
-//        }
-//        System.out.println(lucro);
-//        lbl_lucro.setText(String.valueOf("R$ " + lucro));
-//        lbl_total_produtos.setText(String.valueOf(totalProdutos));
+        totalProdutosVendidos = 0;
+
+        HashMap<Produto, Integer> produtoMap = new HashMap<>();
+        HashMap<Categoria, Integer> categoriaMap = new HashMap<>();
+        int maiorP = 0;
+        int maiorC = 0;
+        Categoria maiorCategoria = null;
+        Produto maiorProduto = null;
+
+        for (Pedido p : pedidos) {
+            lucro += p.getValor();
+            totalProdutosVendidos += p.getProdutosNoPedido().size();
+
+            for (ProdutoPedido pp : p.getProdutosNoPedido()) {
+                if (produtoMap.get(pp.getProduto()) == null) {
+                    if (maiorP == 0) {
+                        maiorP = 1;
+                        maiorProduto = pp.getProduto();
+                    }
+                    produtoMap.put(pp.getProduto(), 1);
+                } else {
+                    int novoValor = produtoMap.get(pp.getProduto()) + 1;
+                    if (novoValor > maiorP) {
+                        maiorP = novoValor;
+                        maiorProduto = pp.getProduto();
+                    }
+                    produtoMap.put(pp.getProduto(), novoValor);
+                }
+                if (categoriaMap.get(pp.getProduto()) == null) {
+                    if (maiorC == 0) {
+                        maiorC = 1;
+                        for (Categoria cat : EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCategorias()) {
+                            if (cat.getProdutos().contains(pp.getProduto())) {
+                                categoriaMap.put(cat, maiorC);
+                                maiorCategoria = cat;
+                            }
+                        }
+                    }
+                } else {
+                    Categoria aux = null;
+                    for (Categoria cat : EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCategorias()) {
+                        if (cat.getProdutos().contains(pp.getProduto())) {
+                            categoriaMap.put(cat, maiorC);
+                            aux = cat;
+                        }
+                    }
+                    int novoValor = categoriaMap.get(aux);
+                    if(novoValor > maiorC){
+                        maiorC = novoValor;
+                        maiorCategoria = aux;
+                    }
+                    categoriaMap.put(aux, novoValor);
+
+                }
+            }
+        }
+
+        lbl_categoria_vend.setText(maiorCategoria.getNome());
+        lbl_produto_vend.setText(maiorProduto.getNome());
+        lbl_lucro.setText(String.valueOf("R$ " + lucro));
+        lbl_total_produtos.setText(String.valueOf(totalProdutosVendidos + " produtos"));
     }
 
 
