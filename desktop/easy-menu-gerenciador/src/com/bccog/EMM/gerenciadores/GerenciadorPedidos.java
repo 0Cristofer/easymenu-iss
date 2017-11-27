@@ -76,47 +76,46 @@ public class GerenciadorPedidos {
      */
     public static Pedido getPedido(String key){
         Usuario usuario = EMM.getInstance().getUsuarioAtual();
-        JsonElement element;
+        JsonElement element = null;
         Gson gson = new Gson();
         Pedido object;
 
         try {
             element = BancoDeDados.getInstance().getData(usuario.getToken(), "/" +
                     Pedido.class.getSimpleName().toLowerCase() + "/" + key);
-
-            if(element.isJsonNull()){
-                return null;
-            }
-
-            object = gson.fromJson(element.toString(), Pedido.class);
-            object.setId(key);
-            object.setCliente(GerenciadorUsuarios.carregaCliente(object.getClienteId()));
-
-            int i = 0;
-            List<ProdutoPedido> ProdutosNoPedido = object.getProdutosNoPedido();
-
-            if(ProdutosNoPedido != null) {
-
-                for (ProdutoPedido p : ProdutosNoPedido) {
-                    for(Produto pp : GerenciadorEstabelecimentos.getEstabelecimento().getProdutos()){
-                        if(pp.equals(p.getProduto())){
-                            p.setProduto(pp);
-                        }
-                    }
-                    i = i + 1;
-                }
-            }
-
-            //object.setProdutosNoPedido();
-
-            return object;
-
         } catch (ForbiddenException | BadRequestException | NotAuthorizedException | NotImplementedErrorExcpetion |
                 InternalServerErrorException | NotFoundException | NoConnectionException e) {
             e.printStackTrace();
         }
+        if(element == null) return null;
 
-        return null;
+
+        if(element.isJsonNull()){
+            return null;
+        }
+
+        object = gson.fromJson(element.toString(), Pedido.class);
+        object.setId(key);
+        object.setCliente(GerenciadorUsuarios.carregaCliente(object.getClienteId()));
+
+
+        int i = 0;
+        List<ProdutoPedido> ProdutosNoPedido = object.getProdutosNoPedido();
+
+        if(ProdutosNoPedido != null) {
+
+            for (ProdutoPedido p : ProdutosNoPedido) {
+                for(Produto pp : EMM.getInstance().getUsuarioAtual().getEstabelecimento().getProdutos()){
+                    if(pp.getId().equals(p.getProdutoId())){
+                        p.setProduto(pp);
+                    }
+                }
+                i = i + 1;
+            }
+        }
+
+
+        return object;
     }
 
     /**
@@ -128,8 +127,6 @@ public class GerenciadorPedidos {
 
         Set<String> keys = gerenciador.getKeys(Estabelecimento.class.getSimpleName().toLowerCase() + "/"
                 + EMM.getInstance().getUsuarioAtual().getEstabelecimento().getId() + "/" + Pedido.class.getSimpleName().toLowerCase() + "/");
-
-        System.out.println("Pedidos Keys size = " + keys.size());
 
         for (String key: keys) {
             pedidos.add(getPedido(key));
