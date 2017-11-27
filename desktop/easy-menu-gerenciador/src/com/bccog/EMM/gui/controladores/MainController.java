@@ -80,14 +80,14 @@ public class MainController implements BaseController {
         total_Produtos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().numeroProdutos();
         totalProdutosVendidos = 0;
 
-        HashMap<Produto, Integer> produtoMap = new HashMap<>();
-        HashMap<Categoria, Integer> categoriaMap = new HashMap<>();
-        int maiorP = 0;
-        int maiorC = 0;
-        Categoria maiorCategoria = null;
-        Produto maiorProduto = null;
+        if(!pedidos.isEmpty()){
+            HashMap<Produto, Integer> produtoMap = new HashMap<>();
+            HashMap<Categoria, Integer> categoriaMap = new HashMap<>();
+            int maiorP = 0;
+            int maiorC = 0;
+            Categoria maiorCategoria = null;
+            Produto maiorProduto = null;
 
-        if(!pedidos.isEmpty()) {
             for (Pedido p : pedidos) {
                 lucro += p.getValor();
                 totalProdutosVendidos += p.getProdutosNoPedido().size();
@@ -107,6 +107,7 @@ public class MainController implements BaseController {
                         }
                         produtoMap.put(pp.getProduto(), novoValor);
                     }
+
                     if (categoriaMap.get(pp.getProduto()) == null) {
                         if (maiorC == 0) {
                             maiorC = 1;
@@ -135,11 +136,12 @@ public class MainController implements BaseController {
                     }
                 }
             }
-
-            if(maiorCategoria != null && maiorProduto != null) {
+            if (maiorCategoria !=null){
                 lbl_categoria_vend.setText(maiorCategoria.getNome());
+            } else System.out.println("CAT NULL");
+            if(maiorProduto != null){
                 lbl_produto_vend.setText(maiorProduto.getNome());
-            }
+            }else System.out.println("PROD NULL");
             lbl_lucro.setText(String.valueOf("R$ " + lucro));
             lbl_total_produtos.setText(String.valueOf(totalProdutosVendidos + " produtos"));
         }
