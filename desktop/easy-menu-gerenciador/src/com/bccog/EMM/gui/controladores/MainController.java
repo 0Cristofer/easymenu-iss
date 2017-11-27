@@ -11,6 +11,7 @@ import com.bccog.FXController.ScreenController;
 import com.jfoenix.controls.JFXTreeTableView;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
@@ -36,6 +37,8 @@ public class MainController implements BaseController {
     public Label lbl_lucro;
     public Button btn_gerenciador_cupons;
     public JFXTreeTableView<ProdutoView> cupom_view;
+    public DatePicker date_inicial;
+    public DatePicker date_final;
 
     List<Pedido> pedidos;
     int total_Categorias;
@@ -123,12 +126,9 @@ public class MainController implements BaseController {
                                     maiorCategoria = categoria;
                                 }
                                 categoriaMap.put(categoria, novoValor);
-
                             }
                         }
                     }
-
-
                 }
             }
             lbl_categoria_vend.setText(maiorCategoria.getNome());
