@@ -45,6 +45,7 @@ public class MainController implements BaseController {
     int total_Produtos;
     private float lucro;
     private int totalProdutosVendidos;
+    boolean lucroVisto = false;
 
     public void produtos() {
         controller_.setVisibleScreen("produtos");
@@ -92,7 +93,9 @@ public class MainController implements BaseController {
             Produto maiorProduto = null;
 
             for (Pedido p : pedidos) {
-                lucro += p.getValor();
+                if (!lucroVisto){
+                    lucro += p.getValor();
+                }
                 totalProdutosVendidos += p.getProdutosNoPedido().size();
 
                 for (ProdutoPedido pp : p.getProdutosNoPedido()) {
@@ -141,6 +144,7 @@ public class MainController implements BaseController {
             lbl_lucro.setText("Nao ha pedidos!");
             lbl_total_produtos.setText("Nao ha pedidos!");
         }
+        lucroVisto = true;
     }
 
 
