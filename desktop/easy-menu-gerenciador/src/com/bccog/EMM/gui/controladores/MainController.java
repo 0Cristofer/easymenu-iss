@@ -40,6 +40,7 @@ public class MainController implements BaseController {
     public Label lbl_bemvindo_;
     public BorderPane main_pane_;
     public Button btn_produtos_;
+    public Button btn_filtrar;
     public Label lbl_categoria_vend;
     public Label lbl_produto_vend;
     public Label lbl_total_produtos;
@@ -127,7 +128,7 @@ public class MainController implements BaseController {
         expiraCol.setCellValueFactory(param -> param.getValue().getValue().timestampProperty());
 
 
-        List<Cupons> cupons = new ArrayList<>();
+        List<Cupons> cupons;
         cupons = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCupons();
         ObservableList<CuponsView> cuponsv = FXCollections.observableArrayList();
         System.out.println("Cupons keys:"  + cupons.size());

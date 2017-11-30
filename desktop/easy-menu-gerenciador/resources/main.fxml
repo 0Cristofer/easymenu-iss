@@ -124,10 +124,16 @@
                           <rowConstraints>
                             <RowConstraints maxHeight="131.0" minHeight="10.0" percentHeight="10.0" prefHeight="104.0" vgrow="SOMETIMES" />
                             <RowConstraints maxHeight="318.0" minHeight="10.0" percentHeight="80.0" prefHeight="302.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="103.0" minHeight="10.0" percentHeight="22.0" prefHeight="103.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="103.0" minHeight="10.0" percentHeight="25.0" prefHeight="103.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <JFXButton fx:id="btn_gerenciador_cupons" onAction="#gerenciador_cupons" styleClass="btn_sim_" stylesheets="@stylesheet.css" text="Gerenciador Cupons" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                              <JFXButton fx:id="btn_gerenciador_cupons" onAction="#gerenciador_cupons" prefHeight="52.0" prefWidth="206.0" styleClass="btn_sim_" stylesheets="@stylesheet.css" text="Gerenciador Cupons" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="1.0" />
+                                 </GridPane.margin></JFXButton>
                               <Label text="Cupons Ativos" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                  <font>
                                     <Font size="15.0" />
@@ -161,10 +167,10 @@
                             <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints maxHeight="77.0" minHeight="10.0" percentHeight="15.0" prefHeight="74.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="103.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="103.0" minHeight="10.0" percentHeight="22.0" prefHeight="82.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Data inicial:" GridPane.halignment="LEFT">
+                              <Label styleClass="card" text="Data inicial:" GridPane.halignment="LEFT">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -254,12 +260,16 @@
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="btn_gerenciador_cupons1" onAction="#filtrar" styleClass="btn_sim_" stylesheets="@stylesheet.css" text="Filtrar por Data" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.rowSpan="2147483647" GridPane.valignment="CENTER" />
                               <Label fx:id="lbl_erro" textFill="#f80101" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.rowSpan="2147483647" GridPane.valignment="BOTTOM">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" />
                                  </GridPane.margin>
                               </Label>
+                              <JFXButton fx:id="btn_filtrar" onAction="#filtrar" prefHeight="52.0" prefWidth="137.0" style="-fx-background-color: steelblue;" styleClass="btn_sim_" stylesheets="@stylesheet.css" text="Filtrar" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="6" GridPane.rowSpan="2147483647">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </JFXButton>
                            </children>
                         </GridPane>
                         <Label />
