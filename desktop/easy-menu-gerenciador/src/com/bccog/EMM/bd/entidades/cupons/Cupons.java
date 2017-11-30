@@ -1,5 +1,6 @@
 package com.bccog.EMM.bd.entidades.cupons;
     import com.bccog.EMM.bd.EntidadeBasica;
+    import com.bccog.EMM.bd.entidades.categoria.Categoria;
     import com.google.gson.annotations.SerializedName;
 
 
@@ -17,11 +18,13 @@ public class Cupons extends EntidadeBasica{
     private long timestamp_;
     @SerializedName("valor")
     private float valor_;
+    private transient Categoria categoria_;
 
-    public Cupons (String nome, long timestamp, float valor){
+    public Cupons (String nome, long timestamp, float valor, Categoria categoria){
         this.nome_ = nome;
         this.timestamp_ = timestamp;
         this.valor_ = valor;
+        this.categoria_ = categoria;
 
     }
 
@@ -47,5 +50,13 @@ public class Cupons extends EntidadeBasica{
 
     public float getValor_() {
         return valor_;
+    }
+
+    public Categoria getCategoria_() {
+        return categoria_;
+    }
+
+    public void setCategoria_(Categoria categoria_) {
+        this.categoria_ = categoria_;
     }
 }

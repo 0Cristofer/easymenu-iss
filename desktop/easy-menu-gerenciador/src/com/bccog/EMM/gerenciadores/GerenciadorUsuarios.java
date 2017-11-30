@@ -5,12 +5,14 @@ import com.bccog.EMM.bd.BancoDeDados;
 import com.bccog.EMM.bd.entidades.cardapio.Cardapio;
 import com.bccog.EMM.bd.entidades.categoria.Categoria;
 import com.bccog.EMM.bd.entidades.cliente.Cliente;
+import com.bccog.EMM.bd.entidades.cupons.Cupons;
 import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.entidades.usuario.Usuario;
 import com.bccog.EMM.bd.exceptions.*;
 import com.bccog.EMM.bd.responses.SingInResponse;
 import com.bccog.EMM.bd.responses.SingUpResponse;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -115,6 +117,7 @@ public class GerenciadorUsuarios {
         List<Cardapio> cardapios = GerenciadorCardapios.getCardapios();
         List<Categoria> categorias = GerenciadorCategoria.getCategorias();
         List<Produto> produtos = GerenciadorProdutos.getProdutos();
+        List<Cupons> cupons = GerenciadorCupons.getCupons();
 
         HashMap<String, Categoria> categoria_hash = new HashMap<>();
         HashMap<String, Produto> produto_hash = new HashMap<>();
@@ -143,5 +146,6 @@ public class GerenciadorUsuarios {
         usuario.getEstabelecimento().setCategorias(categorias);
         usuario.getEstabelecimento().setProdutos(produtos);
         usuario.getEstabelecimento().setPedidos(GerenciadorPedidos.getPedidos());
+        usuario.getEstabelecimento().setCupons(cupons);
     }
 }

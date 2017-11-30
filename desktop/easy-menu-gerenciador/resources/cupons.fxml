@@ -180,6 +180,14 @@
                         <Insets left="5.0" />
                      </GridPane.margin>
                   </JFXDatePicker>
+                  <Label fx:id="lbl_aviso" text="Invalido!" textFill="RED" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" />
