@@ -15,7 +15,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,11 +40,8 @@ public class MainController implements BaseController {
     public DatePicker date_final;
 
     List<Pedido> pedidos;
-    int total_Categorias;
-    int total_Produtos;
     private float lucro;
     private int totalProdutosVendidos;
-    boolean lucroVisto = false;
 
     public void produtos() {
         controller_.setVisibleScreen("produtos");
@@ -78,34 +74,44 @@ public class MainController implements BaseController {
     @Override
     public void atualizar() {
         pedidos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getPedidos();
-
         lbl_bemvindo_.setText("Bem vindo, " + EMM.getInstance().getUsuarioAtual().getEstabelecimento().getNome());
-        total_Categorias = EMM.getInstance().getUsuarioAtual().getEstabelecimento().numeroCategorias();
-        total_Produtos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().numeroProdutos();
+        totalProdutosVendidos_Lucro(pedidos);
+        produtoMaisVendido(pedidos);
+        categoriaMaisVendida(pedidos);
+    }
+
+    public void totalProdutosVendidos_Lucro(List<Pedido> p) {
         totalProdutosVendidos = 0;
+        lucro = 0;
+        if (!p.isEmpty()) {
+            for (Pedido pedido : p) {
+                lucro += pedido.getValor();
+                totalProdutosVendidos += pedido.getProdutosNoPedido().size();
+            }
+            lbl_lucro.setText(String.valueOf("R$ " + lucro));
+            lbl_total_produtos.setText(String.valueOf(totalProdutosVendidos + " produtos"));
+        }
+        else {
+            lbl_lucro.setText("Nao ha pedidos!");
+            lbl_total_produtos.setText("Nao ha pedidos!");
+        }
+    }
 
-        if(!pedidos.isEmpty()){
+    public void produtoMaisVendido( List<Pedido> p){
+        if(!p.isEmpty()){
             HashMap<Produto, Integer> produtoMap = new HashMap<>();
-            HashMap<Categoria, Integer> categoriaMap = new HashMap<>();
             int maiorP = 0;
-            int maiorC = 0;
-            Categoria maiorCategoria = null;
             Produto maiorProduto = null;
-
-            for (Pedido p : pedidos) {
-                if (!lucroVisto){
-                    lucro += p.getValor();
-                }
-                totalProdutosVendidos += p.getProdutosNoPedido().size();
-
-                for (ProdutoPedido pp : p.getProdutosNoPedido()) {
+            for (Pedido pedido : p) {
+                for (ProdutoPedido pp : pedido.getProdutosNoPedido()) {
                     if (produtoMap.get(pp.getProduto()) == null) {
                         if (maiorP == 0) {
                             maiorP = 1;
                             maiorProduto = pp.getProduto();
                         }
                         produtoMap.put(pp.getProduto(), 1);
-                    } else {
+                    }
+                    else {
                         int novoValor = produtoMap.get(pp.getProduto()) + 1;
                         if (novoValor > maiorP) {
                             maiorP = novoValor;
@@ -113,7 +119,23 @@ public class MainController implements BaseController {
                         }
                         produtoMap.put(pp.getProduto(), novoValor);
                     }
+                }
+            }
+            lbl_produto_vend.setText(maiorProduto.getNome());
+        }
+        else {
+            lbl_produto_vend.setText("Nao ha pedidos!");
+        }
+    }
 
+    public void categoriaMaisVendida (List<Pedido> p){
+        if(!p.isEmpty()){
+            HashMap<Categoria, Integer> categoriaMap = new HashMap<>();
+            int maiorC = 0;
+            Categoria maiorCategoria = null;
+
+            for (Pedido pedido : p) {
+                for (ProdutoPedido pp : pedido.getProdutosNoPedido()) {
                     for (Categoria categoria : EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCategorias()) {
                         if (categoria.getProdutos().contains(pp.getProduto())) {
                             if (categoriaMap.get(categoria) == null) {
@@ -122,7 +144,8 @@ public class MainController implements BaseController {
                                     maiorCategoria = categoria;
                                 }
                                 categoriaMap.put(categoria, 1);
-                            } else {
+                            }
+                            else {
                                 int novoValor = categoriaMap.get(categoria) + 1;
                                 if (novoValor > maiorC) {
                                     maiorC = novoValor;
@@ -135,16 +158,11 @@ public class MainController implements BaseController {
                 }
             }
             lbl_categoria_vend.setText(maiorCategoria.getNome());
-            lbl_produto_vend.setText(maiorProduto.getNome());
-            lbl_lucro.setText(String.valueOf("R$ " + lucro));
-            lbl_total_produtos.setText(String.valueOf(totalProdutosVendidos + " produtos"));
-        } else {
-            lbl_categoria_vend.setText("Nao ha pedidos!");
-            lbl_produto_vend.setText("Nao ha pedidos!");
-            lbl_lucro.setText("Nao ha pedidos!");
-            lbl_total_produtos.setText("Nao ha pedidos!");
+
         }
-        lucroVisto = true;
+        else {
+            lbl_categoria_vend.setText("Nao ha pedidos!");
+        }
     }
 
 
