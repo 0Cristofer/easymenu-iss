@@ -14,7 +14,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -43,6 +42,8 @@ public class MainController implements BaseController {
     private float lucro;
     private int totalProdutosVendidos;
 
+    public void iniciarSessao(){ controller_.setVisibleScreen("sessao_trabalho");}
+
     public void produtos() {
         controller_.setVisibleScreen("produtos");
     }
@@ -69,6 +70,24 @@ public class MainController implements BaseController {
 
     public void sair() {
         Platform.exit();
+    }
+
+    @Override
+    public void init(){ }
+
+    @Override
+    public void setMainController(ScreenController controller) {
+        controller_ = controller;
+    }
+
+    @Override
+    public double getWidth() {
+        return main_pane_.getPrefWidth();
+    }
+
+    @Override
+    public double getHeight() {
+        return main_pane_.getPrefHeight();
     }
 
     @Override
@@ -164,26 +183,5 @@ public class MainController implements BaseController {
             lbl_categoria_vend.setText("Nao ha pedidos!");
         }
     }
-
-
-    @Override
-    public void init(){
-    }
-
-    @Override
-    public void setMainController(ScreenController controller) {
-        controller_ = controller;
-    }
-
-    @Override
-    public double getWidth() {
-        return main_pane_.getPrefWidth();
-    }
-
-    @Override
-    public double getHeight() {
-        return main_pane_.getPrefHeight();
-    }
-
-    public void iniciarSessao(){ controller_.setVisibleScreen("sessao_trabalho");}
 }
+
