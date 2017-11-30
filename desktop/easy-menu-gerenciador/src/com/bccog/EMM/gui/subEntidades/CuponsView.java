@@ -25,13 +25,29 @@ public class CuponsView extends RecursiveTreeObject<CuponsView>{
     public CuponsView(Cupons cupons) {
         this.cupons = cupons;
         this.nome_ = new SimpleStringProperty(cupons.getNome_());
-        this.timestamp = new SimpleStringProperty();
-        this.valor = new SimpleStringProperty(String.valueOf(cupons.getValor_()));
+        this.valor = new SimpleStringProperty(String.valueOf(cupons.getValor_()) + "%");
+
+        DateTime data = new DateTime(cupons.getTimestamp_());
+        this.timestamp = new SimpleStringProperty( Integer.toString(data.getDayOfMonth()) + "/" + Integer.toString(data.getMonthOfYear()));
+
     }
 
     public String getNome_() {
         return nome_.get();
     }
+
+    public void setNome_(String nome_) {
+        this.nome_.set(nome_);
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp.set(timestamp);
+    }
+
+    public void setValor(String valor) {
+        this.valor.set(valor);
+    }
+
 
     public StringProperty nome_Property() {
         return nome_;
