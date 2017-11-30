@@ -72,8 +72,9 @@ public class SelProdutoActivity extends AppCompatActivity implements View.OnClic
             confirmar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ControladorPedido.fecharPedido();
+                    int total = ControladorPedido.fecharPedido();
                     dialog.cancel();
+                    Toast.makeText(view.getContext(), "Pedido com " + String.valueOf(total) + " produtos enviado!", Toast.LENGTH_LONG).show();
                 }
             });
 
