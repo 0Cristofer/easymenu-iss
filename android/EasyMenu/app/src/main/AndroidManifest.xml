@@ -21,7 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".gui.activities.ProdutosActivity" />
         <activity android:name=".gui.activities.SocialLoginActivity" />
         <activity
             android:name=".gui.activities.SelEstActivity"

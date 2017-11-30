@@ -127,12 +127,17 @@ public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoHolder> {
                                 Toast.makeText(dialog.getContext(), "Quantidade inválida", Toast.LENGTH_LONG).show();
                                 return;
                             }
-                            if(Integer.parseInt(quantidade.getText().toString()) < 1){
+
+                            int qtd = Integer.parseInt(quantidade.getText().toString());
+                            if(qtd < 1){
                                 Toast.makeText(dialog.getContext(), "Quantidade inválida", Toast.LENGTH_LONG).show();
                                 return;
                             }
-                            ControladorPedido.adicionarProdutoPedido(atual,
-                                    Integer.parseInt(quantidade.getText().toString()),
+                            if((ControladorPedido.getTotal() + qtd) > ControladorPedido.getMaxProdutos()){
+                                Toast.makeText(dialog.getContext(), "Quantidade máxima de produtos atingida", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                            ControladorPedido.adicionarProdutoPedido(atual, qtd,
                                     l.preco_escolhido);
                             dialog.cancel();
                         }

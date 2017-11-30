@@ -27,6 +27,7 @@ public class ControladorPedido {
     private static List<List<ProdutoPedido>> produtos_pedidos = null;
     private static int total = 0;
     private static float valor_total = 0f;
+    private static int MAX_PRODUTOS = 1000;
     private static TextView txt_total;
 
     public static void setTxtTotal(TextView total){
@@ -99,7 +100,7 @@ public class ControladorPedido {
         produtos_pedidos.remove(produtos);
     }
 
-    public static void fecharPedido(){
+    public static int fecharPedido(){
         DatabaseReference datapedido_reference = FirebaseDatabase.getInstance().getReference("/" + Pedido.class.getSimpleName().toLowerCase());
         DatabaseReference pedido_e_reference = FirebaseDatabase.getInstance().
                 getReference("/estabelecimento/"+ControladorEstabelecimento.getAtual().getId()).child(Pedido.class.getSimpleName().toLowerCase());
@@ -116,11 +117,14 @@ public class ControladorPedido {
         pedido_e_reference.updateChildren(map);
         pedido_c_reference.updateChildren(map);
 
+        int total_b = total;
         total = 0;
         valor_total = 0f;
         txt_total.setText("0");
         pedido = null;
         produtos_pedidos.clear();
+
+        return total_b;
     }
 
     public static int getTotal() {
@@ -129,5 +133,9 @@ public class ControladorPedido {
 
     public static float getValorTotal() {
         return valor_total;
+    }
+
+    public static int getMaxProdutos(){
+        return MAX_PRODUTOS;
     }
 }
