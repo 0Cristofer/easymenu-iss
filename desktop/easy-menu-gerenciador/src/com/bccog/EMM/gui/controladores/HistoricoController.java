@@ -38,6 +38,8 @@ public class HistoricoController implements BaseController {
     public Label lbl_finalizado;
     public Label lbl_valor;
     public TextArea txtA_desc;
+    public JFXDatePicker date_picker;
+    private int time = -1;
 
     public void dadosEstabelecimento(){ controller_.setVisibleScreen("info_estabelecimento");}
 
@@ -91,8 +93,17 @@ public class HistoricoController implements BaseController {
         List<Pedido> pedidos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getPedidos();
         ObservableList<PedidoView> pedidosv = FXCollections.observableArrayList();
         System.out.println(pedidos.size());
-        for (Pedido p : pedidos) {
-            pedidosv.add(new PedidoView(p));
+
+        if(time == -1){
+            for (Pedido p : pedidos) {
+                pedidosv.add(new PedidoView(p));
+            }
+        } else {
+            for (Pedido p : pedidos) {
+                if(new DateTime(p.getTimestamp()).getDayOfYear() == time){
+                    pedidosv.add(new PedidoView(p));
+                }
+            }
         }
 
         final TreeItem<PedidoView> root = new RecursiveTreeItem<>(pedidosv, RecursiveTreeObject::getChildren);
@@ -134,6 +145,16 @@ public class HistoricoController implements BaseController {
     @Override
     public void init() {
 
+    }
+
+    public void clear(){
+        time = -1;
+        atualizar();
+    }
+
+    public void filtrar(){
+        time = date_picker.getValue().getDayOfYear();
+        atualizar();
     }
 
     @Override

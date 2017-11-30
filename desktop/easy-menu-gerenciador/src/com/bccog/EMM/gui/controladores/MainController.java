@@ -11,6 +11,7 @@ import com.bccog.FXController.ScreenController;
 import com.jfoenix.controls.JFXTreeTableView;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 
@@ -36,12 +37,15 @@ public class MainController implements BaseController {
     public Label lbl_lucro;
     public Button btn_gerenciador_cupons;
     public JFXTreeTableView<ProdutoView> cupom_view;
+    public DatePicker date_inicial;
+    public DatePicker date_final;
 
     List<Pedido> pedidos;
     int total_Categorias;
     int total_Produtos;
     private float lucro;
     private int totalProdutosVendidos;
+    boolean lucroVisto = false;
 
     public void produtos() {
         controller_.setVisibleScreen("produtos");
@@ -89,7 +93,9 @@ public class MainController implements BaseController {
             Produto maiorProduto = null;
 
             for (Pedido p : pedidos) {
-                lucro += p.getValor();
+                if (!lucroVisto){
+                    lucro += p.getValor();
+                }
                 totalProdutosVendidos += p.getProdutosNoPedido().size();
 
                 for (ProdutoPedido pp : p.getProdutosNoPedido()) {
@@ -108,43 +114,37 @@ public class MainController implements BaseController {
                         produtoMap.put(pp.getProduto(), novoValor);
                     }
 
-                    if (categoriaMap.get(pp.getProduto()) == null) {
-                        if (maiorC == 0) {
-                            maiorC = 1;
-                            for (Categoria cat : EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCategorias()) {
-                                if (cat.getProdutos().contains(pp.getProduto())) {
-                                    categoriaMap.put(cat, maiorC);
-                                    maiorCategoria = cat;
+                    for (Categoria categoria : EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCategorias()) {
+                        if (categoria.getProdutos().contains(pp.getProduto())) {
+                            if (categoriaMap.get(categoria) == null) {
+                                if (maiorC == 0) {
+                                    maiorC = 1;
+                                    maiorCategoria = categoria;
                                 }
+                                categoriaMap.put(categoria, 1);
+                            } else {
+                                int novoValor = categoriaMap.get(categoria) + 1;
+                                if (novoValor > maiorC) {
+                                    maiorC = novoValor;
+                                    maiorCategoria = categoria;
+                                }
+                                categoriaMap.put(categoria, novoValor);
                             }
                         }
-                    } else {
-                        Categoria aux = null;
-                        for (Categoria cat : EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCategorias()) {
-                            if (cat.getProdutos().contains(pp.getProduto())) {
-                                categoriaMap.put(cat, maiorC);
-                                aux = cat;
-                            }
-                        }
-                        int novoValor = categoriaMap.get(aux);
-                        if (novoValor > maiorC) {
-                            maiorC = novoValor;
-                            maiorCategoria = aux;
-                        }
-                        categoriaMap.put(aux, novoValor);
-
                     }
                 }
             }
-            if (maiorCategoria !=null){
-                lbl_categoria_vend.setText(maiorCategoria.getNome());
-            } else System.out.println("CAT NULL");
-            if(maiorProduto != null){
-                lbl_produto_vend.setText(maiorProduto.getNome());
-            }else System.out.println("PROD NULL");
+            lbl_categoria_vend.setText(maiorCategoria.getNome());
+            lbl_produto_vend.setText(maiorProduto.getNome());
             lbl_lucro.setText(String.valueOf("R$ " + lucro));
             lbl_total_produtos.setText(String.valueOf(totalProdutosVendidos + " produtos"));
+        } else {
+            lbl_categoria_vend.setText("Nao ha pedidos!");
+            lbl_produto_vend.setText("Nao ha pedidos!");
+            lbl_lucro.setText("Nao ha pedidos!");
+            lbl_total_produtos.setText("Nao ha pedidos!");
         }
+        lucroVisto = true;
     }
 
 
