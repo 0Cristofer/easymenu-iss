@@ -2,20 +2,29 @@ package com.bccog.EMM.gui.controladores;
 
 import com.bccog.EMM.EMM;
 import com.bccog.EMM.bd.entidades.categoria.Categoria;
+import com.bccog.EMM.bd.entidades.cupons.Cupons;
 import com.bccog.EMM.bd.entidades.pedido.Pedido;
 import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.entidades.produto.ProdutoPedido;
+import com.bccog.EMM.gui.subEntidades.CuponsView;
 import com.bccog.EMM.gui.subEntidades.ProdutoView;
 import com.bccog.FXController.BaseController;
 import com.bccog.FXController.ScreenController;
+import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TreeItem;
 import javafx.scene.layout.BorderPane;
 import org.joda.time.DateTime;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,7 +46,7 @@ public class MainController implements BaseController {
     public Label lbl_valor_vendido;
     public Label lbl_erro;
     public Button btn_gerenciador_cupons;
-    public JFXTreeTableView<ProdutoView> cupom_view;
+    public JFXTreeTableView<CuponsView> cupom_view;
     public DatePicker date_inicial;
     public DatePicker date_final;
 
@@ -99,10 +108,39 @@ public class MainController implements BaseController {
     public void atualizar() {
         pedidos = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getPedidos();
         lbl_bemvindo_.setText("Bem vindo, " + EMM.getInstance().getUsuarioAtual().getEstabelecimento().getNome());
-
         produtosVendidos_valorVendido(pedidos, data_inicial, data_final);
         produtoMaisVendido(pedidos, data_inicial, data_final);
         categoriaMaisVendida(pedidos, data_inicial, data_final);
+
+
+        JFXTreeTableColumn<CuponsView, String> codCol = new JFXTreeTableColumn<>("Codigo");
+        codCol.setPrefWidth(100);
+        codCol.setCellValueFactory(param -> param.getValue().getValue().nome_Property());
+
+
+        JFXTreeTableColumn<CuponsView, String> valCol = new JFXTreeTableColumn<>("Desconto");
+        valCol.setPrefWidth(100);
+        valCol.setCellValueFactory(param -> param.getValue().getValue().valorProperty());
+
+        JFXTreeTableColumn<CuponsView, String> expiraCol = new JFXTreeTableColumn<>("Data");
+        expiraCol.setPrefWidth(150);
+        expiraCol.setCellValueFactory(param -> param.getValue().getValue().timestampProperty());
+
+
+        List<Cupons> cupons = new ArrayList<>();
+        cupons = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCupons();
+        ObservableList<CuponsView> cuponsv = FXCollections.observableArrayList();
+        System.out.println("Cupons keys:"  + cupons.size());
+
+        for (Cupons c : cupons) {
+            cuponsv.add(new CuponsView(c));
+        }
+
+
+        final TreeItem<CuponsView> root = new RecursiveTreeItem<>(cuponsv, RecursiveTreeObject::getChildren);
+        cupom_view.getColumns().setAll(codCol, valCol, expiraCol);
+        cupom_view.setRoot(root);
+        cupom_view.setShowRoot(false);
     }
 
     public void filtrar(){
