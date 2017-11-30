@@ -3,6 +3,7 @@ package com.bccog.EMM.gerenciadores;
 import com.bccog.EMM.EMM;
 import com.bccog.EMM.bd.entidades.cardapio.Cardapio;
 import com.bccog.EMM.bd.entidades.categoria.Categoria;
+import com.bccog.EMM.bd.entidades.cupons.Cupons;
 import com.bccog.EMM.bd.entidades.produto.Produto;
 import com.bccog.EMM.bd.entidades.usuario.Usuario;
 import com.bccog.EMM.bd.exceptions.*;
@@ -27,8 +28,7 @@ public class GerenciadorCategoria {
      * Carrega a lista de categorias do usuário
      * @return A lista de categorias
      */
-    public static List<Categoria> getCategorias(){
-        return gerenciador_.get();
+    public static List<Categoria> getCategorias(){ return gerenciador_.get();
     }
 
     static Set<String> getCategoriasCardapio(Cardapio cardapio){
@@ -121,6 +121,12 @@ public class GerenciadorCategoria {
         if(categoria.getProdutos().contains(produto)) return;
         categoria.addProduto(produto);
         gerenciador_.relaciona(categoria, produto);
+
+    }
+
+    public static void adicionarCuponsCategoria(Categoria categoria, Cupons cupons) throws ForbiddenException, BadRequestException, NotImplementedErrorExcpetion, NotAuthorizedException, InternalServerErrorException, NotFoundException, NoConnectionException {
+        gerenciador_.relaciona(categoria,cupons);
+
     }
 
     /**

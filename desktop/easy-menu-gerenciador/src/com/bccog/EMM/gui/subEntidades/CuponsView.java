@@ -28,6 +28,34 @@ public class CuponsView extends RecursiveTreeObject<CuponsView>{
         this.timestamp = new SimpleStringProperty();
         this.valor = new SimpleStringProperty(String.valueOf(cupons.getValor_()));
     }
+
+    public String getNome_() {
+        return nome_.get();
+    }
+
+    public StringProperty nome_Property() {
+        return nome_;
+    }
+
+    public String getTimestamp() {
+        return timestamp.get();
+    }
+
+    public StringProperty timestampProperty() {
+        return timestamp;
+    }
+
+    public String getValor() {
+        return valor.get();
+    }
+
+    public StringProperty valorProperty() {
+        return valor;
+    }
+
+    public Cupons getCupons() {
+        return cupons;
+    }
 }
 
 

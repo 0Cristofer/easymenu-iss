@@ -3,6 +3,7 @@ package com.bccog.EMM.bd.entidades.estabelecimento;
 import com.bccog.EMM.bd.EntidadeBasica;
 import com.bccog.EMM.bd.entidades.cardapio.Cardapio;
 import com.bccog.EMM.bd.entidades.categoria.Categoria;
+import com.bccog.EMM.bd.entidades.cupons.Cupons;
 import com.bccog.EMM.bd.entidades.embutido.Delivery;
 import com.bccog.EMM.bd.entidades.embutido.Endereco;
 import com.bccog.EMM.bd.entidades.embutido.HorarioAtendimento;
@@ -25,6 +26,7 @@ public abstract class Estabelecimento extends EntidadeBasica {
     private transient List<Categoria> categorias_;
     private transient List<Produto> produtos_;
     private transient List<Pedido> pedidos_;
+    private transient List<Cupons> cupons;
 
     @SerializedName("nome")
     private String nome_;
@@ -195,5 +197,13 @@ public abstract class Estabelecimento extends EntidadeBasica {
     @Override
     public boolean equals(Object obj) {
         return (obj instanceof Estabelecimento) && super.equals(obj);
+    }
+
+    public List<Cupons> getCupons() {
+        return cupons;
+    }
+
+    public void setCupons(List<Cupons> cupons) {
+        this.cupons = cupons;
     }
 }
