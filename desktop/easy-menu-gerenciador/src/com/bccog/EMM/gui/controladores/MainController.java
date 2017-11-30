@@ -489,7 +489,8 @@ public class MainController implements BaseController {
             }
             else {
             lbl_categoria_vend.setText("Nao ha pedidos!");
-        } }
+            }
+        }
     }
 
     public void totalProdutosVendidos_valorTotal(List<Pedido> listaDePedidos) {
