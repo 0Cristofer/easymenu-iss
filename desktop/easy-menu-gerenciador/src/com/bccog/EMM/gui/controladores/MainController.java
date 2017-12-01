@@ -34,6 +34,7 @@ import java.util.List;
  * @since 24/05/2017
  */
 
+@SuppressWarnings("ALL")
 public class MainController implements BaseController {
     private ScreenController controller_;
 
@@ -115,7 +116,7 @@ public class MainController implements BaseController {
 
 
         JFXTreeTableColumn<CuponsView, String> codCol = new JFXTreeTableColumn<>("Codigo");
-        codCol.setPrefWidth(100);
+        codCol.setPrefWidth(120);
         codCol.setCellValueFactory(param -> param.getValue().getValue().nome_Property());
 
 
@@ -124,7 +125,7 @@ public class MainController implements BaseController {
         valCol.setCellValueFactory(param -> param.getValue().getValue().valorProperty());
 
         JFXTreeTableColumn<CuponsView, String> expiraCol = new JFXTreeTableColumn<>("Data");
-        expiraCol.setPrefWidth(150);
+        expiraCol.setPrefWidth(100);
         expiraCol.setCellValueFactory(param -> param.getValue().getValue().timestampProperty());
 
 
@@ -136,7 +137,6 @@ public class MainController implements BaseController {
         for (Cupons c : cupons) {
             cuponsv.add(new CuponsView(c));
         }
-
 
         final TreeItem<CuponsView> root = new RecursiveTreeItem<>(cuponsv, RecursiveTreeObject::getChildren);
         cupom_view.getColumns().setAll(codCol, valCol, expiraCol);
@@ -160,7 +160,7 @@ public class MainController implements BaseController {
         }
         lbl_erro.setText("");
         if (data_inicial > data_final) {
-            lbl_erro.setText("ERRO! Data inicial < Data final");
+            lbl_erro.setText("ERRO! Data inicial > Data final");
             lbl_categoria_vend.setText("");
             lbl_produto_vend.setText("");
             lbl_total_produtos.setText("");
@@ -550,4 +550,3 @@ public class MainController implements BaseController {
     }
 
 }
-
