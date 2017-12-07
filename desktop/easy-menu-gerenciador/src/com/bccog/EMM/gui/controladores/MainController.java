@@ -17,10 +17,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import org.joda.time.DateTime;
 
@@ -160,11 +157,16 @@ public class MainController implements BaseController {
         }
         lbl_erro.setText("");
         if (data_inicial > data_final) {
-            lbl_erro.setText("ERRO! Data inicial > Data final");
             lbl_categoria_vend.setText("");
             lbl_produto_vend.setText("");
             lbl_total_produtos.setText("");
             lbl_valor_vendido.setText("");
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Erro ao definir as datas!!");
+            alert.setHeaderText(null);
+            alert.setContentText("Data inicial > Data final\n" + "Por favor, selecione uma data inicial < data final.");
+            alert.showAndWait();
+            alert.getOnCloseRequest();
         } else {
             produtosVendidos_valorVendido(pedidos, data_inicial, data_final);
             produtoMaisVendido(pedidos, data_inicial, data_final);
