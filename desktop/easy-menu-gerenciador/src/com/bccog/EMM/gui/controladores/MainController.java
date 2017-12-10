@@ -126,12 +126,16 @@ public class MainController implements BaseController {
         expiraCol.setCellValueFactory(param -> param.getValue().getValue().timestampProperty());
 
 
-        List<Cupons> cupons;
-        cupons = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCupons();
+        List<Cupons> cupons = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCupons();
+        List<Cupons> cupons_a = new ArrayList<>();
+        for(Cupons c : cupons){
+            if(c.getTimestamp_() >= DateTime.now().getMillis()){
+                cupons_a.add(c);
+            }
+        }
         ObservableList<CuponsView> cuponsv = FXCollections.observableArrayList();
-        System.out.println("Cupons keys:"  + cupons.size());
 
-        for (Cupons c : cupons) {
+        for (Cupons c : cupons_a) {
             cuponsv.add(new CuponsView(c));
         }
 

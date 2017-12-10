@@ -142,6 +142,12 @@ public class GerenciadorUsuarios {
             }
         }
 
+        for(Cupons c : cupons){
+            for(String key : GerenciadorCupons.getCategoriaId(c)){
+                c.setCategoria_(categoria_hash.get(key));
+            }
+        }
+
         usuario.getEstabelecimento().setCardapios(cardapios);
         usuario.getEstabelecimento().setCategorias(categorias);
         usuario.getEstabelecimento().setProdutos(produtos);

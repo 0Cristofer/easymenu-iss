@@ -64,6 +64,7 @@ public class CuponsController implements BaseController{
                 GerenciadorCupons.cadastrarCupons(txtf_codigo.getText(), timestamp.getMillis(), Float.parseFloat(txtf_desconto.getText()), categoria_selecionada);
 
                 lbl_aviso.setVisible(false);
+                atualizar();
 
             } catch (NoConnectionException | ForbiddenException | BadRequestException |
                     NotImplementedErrorExcpetion | InternalServerErrorException | NotAuthorizedException |
@@ -160,10 +161,8 @@ public class CuponsController implements BaseController{
         expiraCol.setCellValueFactory(param -> param.getValue().getValue().timestampProperty());
 
 
-        List<Cupons> cupons = new ArrayList<>();
-        cupons = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCupons();
+        List<Cupons> cupons = EMM.getInstance().getUsuarioAtual().getEstabelecimento().getCupons();
         ObservableList<CuponsView> cuponsv = FXCollections.observableArrayList();
-        System.out.println("Cupons keys:"  + cupons.size());
 
         for (Cupons c : cupons) {
             cuponsv.add(new CuponsView(c));
