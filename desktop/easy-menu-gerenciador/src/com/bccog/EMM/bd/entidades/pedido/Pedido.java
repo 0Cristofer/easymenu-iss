@@ -61,6 +61,11 @@ public class Pedido extends EntidadeBasica {
             this.estabelecimento_ = estabelecimento;
         }
 
+        public Pedido (float valor, List<ProdutoPedido> produtos_no_pedido) {
+            this.valor_ = valor;
+            this.produtos_no_pedido_ = produtos_no_pedido;
+        }
+
     public long getTimestamp_final_() {
         return timestamp_final_;
     }

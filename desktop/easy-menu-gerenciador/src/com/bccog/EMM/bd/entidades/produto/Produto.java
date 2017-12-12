@@ -26,6 +26,11 @@ public abstract class Produto extends EntidadeBasica {
         setFoto(foto);
     }
 
+    protected Produto(String nome, String descricao){
+        setNome(nome);
+        setDescricao(descricao);
+    }
+
     public String getNome() {
         return nome_;
     }

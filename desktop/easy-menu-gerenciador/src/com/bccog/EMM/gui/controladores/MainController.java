@@ -534,7 +534,7 @@ public class MainController implements BaseController {
         }
     }
 
-    public void totalProdutosVendidos_valorTotal(List<Pedido> listaDePedidos) {
+    public float totalProdutosVendidos_valorTotal(List<Pedido> listaDePedidos) {
         totalProdutosVendidos = 0;
         valor_vendido = 0;
         if (!listaDePedidos.isEmpty()){
@@ -542,13 +542,14 @@ public class MainController implements BaseController {
                 valor_vendido += pedido.getValor();
                 totalProdutosVendidos += pedido.getProdutosNoPedido().size();
             }
-            lbl_valor_vendido.setText(String.valueOf("R$ " + valor_vendido));
-            lbl_total_produtos.setText(String.valueOf(totalProdutosVendidos + " produtos"));
+//            lbl_valor_vendido.setText(String.valueOf("R$ " + valor_vendido));
+//            lbl_total_produtos.setText(String.valueOf(totalProdutosVendidos + " produtos"));
         }
         else {
             lbl_valor_vendido.setText("Nao ha pedidos!");
             lbl_total_produtos.setText("Nao ha pedidos!");
         }
+        return valor_vendido;
     }
 
 }

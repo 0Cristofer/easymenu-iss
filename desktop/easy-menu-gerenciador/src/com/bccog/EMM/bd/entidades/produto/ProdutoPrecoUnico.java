@@ -16,6 +16,11 @@ public class ProdutoPrecoUnico extends Produto {
         this.preco_ = preco;
     }
 
+    public ProdutoPrecoUnico(String nome, String descricao, float preco){
+        super(nome,descricao);
+        this.preco_ = preco;
+    }
+
     public float getPreco() {
         return preco_;
     }
