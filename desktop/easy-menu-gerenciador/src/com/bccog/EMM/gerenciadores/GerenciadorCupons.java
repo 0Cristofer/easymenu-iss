@@ -9,6 +9,7 @@ import com.bccog.EMM.gerenciadores.exceptions.NegativePriceException;
 import com.bccog.EMM.bd.entidades.categoria.Categoria;
 
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -41,6 +42,11 @@ public class GerenciadorCupons {
         gerenciador_.criar(cupons);
         gerenciador_.relaciona(cupons,categoria);
         usuario.getEstabelecimento().getCupons().add(cupons);
+    }
+
+    public static Set<String> getCategoriaId(Cupons c){
+        return gerenciador_.getKeys(c.getClass().getSimpleName().toLowerCase() + "/" + c.getId() + "/" +
+                Categoria.class.getSimpleName().toLowerCase() + "/");
     }
 
 
